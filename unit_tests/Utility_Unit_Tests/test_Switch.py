@@ -4,7 +4,7 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 import unittest
-from Amplifier.Controls import Switch
+from Utilities.Controls import Switch
 
 class Test(unittest.TestCase):
 

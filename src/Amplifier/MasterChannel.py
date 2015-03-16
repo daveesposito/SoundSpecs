@@ -3,7 +3,7 @@ Created on Mar 13, 2015
 
 @author: desposito
 '''
-from Amplifier.Controls import Knob, Switch
+from Utilities.Controls import Knob, Switch
 
 class MasterChannel(object):
     '''

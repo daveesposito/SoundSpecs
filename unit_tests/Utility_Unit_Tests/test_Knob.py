@@ -4,7 +4,7 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 import unittest
-from Amplifier.Controls import Knob
+from Utilities.Controls import Knob
 
 class Test(unittest.TestCase):
 
