@@ -91,3 +91,67 @@ class Switch(object):
         else:
             return self._false_value
         
+class Multiselect(object):
+    '''
+    Multiselect switch useful for things like guitar pickup selectors.
+    '''
+    
+    def __init__(self, name, current_position, *selections):
+        '''
+        Constructor
+        '''
+        self.Name = name
+        self.current_position = ""
+        self.selections = list()
+        for selection in selections:
+            try:
+                selection_string = str(selection)
+            except:
+                raise TypeError("Invalid selection provide. Must be able to be represented as a string.")
+            self.selections.append(selection_string)
+        self.Set_Selection(current_position)
+        
+    def Set_Selection(self, new_selection):
+        '''
+        Set a new position for the switch.
+        '''
+        if not new_selection in self.selections:
+            raise ValueError("The provide position is not valid for this switch. Provide value: " + str(new_selection))
+        
+        self.current_position = new_selection
+        
+    def Add_Selection(self, new_selection):
+        '''
+        Adds a value to the valid list of selections.
+        '''
+        if new_selection in self.selections:
+            raise ValueError("The provided switch selection already exists. Provided value: " + str(new_selection))
+        
+        self.selections.append(new_selection)
+        
+    def Remove_Selection(self, selection_to_remove):
+        '''
+        Remove a selection from the list of selections.
+        '''
+        if not selection_to_remove in self.selections:
+            raise ValueError("The provided selection does not exist. Provided value: " + str(selection_to_remove))
+        
+        self.selections.remove(selection_to_remove)
+        
+    def Current_Position(self):
+        '''
+        Returns the current switch position.
+        '''
+        return self.current_position
+    
+    def List_Options(self):
+        '''
+        Returns a list of the current available options.
+        '''
+        return self.selections
+    
+    def Number_of_Options(self):
+        '''
+        Returns the number of available options.
+        '''
+        return len(self.selections)
