@@ -42,6 +42,30 @@ class Test(unittest.TestCase):
         F1 = Focusrite_Saffire_Pro40()
         self.assertRaises(ValueError, F1._Get_Switch_Based_On_Channel, 0)
         
+    def test_Channels1thru4ReportFalseWhenPhantomPowerOff(self):
+        F1 = Focusrite_Saffire_Pro40()
+        F1.PhantomPower[1].Turn_On()
+        for channel in range(4):
+            self.assertFalse(F1.IsChannelUsingPhantomPower(channel + 1), "Phantom power not off.")
+
+    def test_Channels1thru4ReportTrueWhenPhantomPowerOn(self):
+        F1 = Focusrite_Saffire_Pro40()
+        F1.PhantomPower[0].Turn_On()
+        for channel in range(4):
+            self.assertTrue(F1.IsChannelUsingPhantomPower(channel + 1), "Phantom power not on.")
+
+    def test_Channels5thru8ReportFalseWhenPhantomPowerOff(self):
+        F1 = Focusrite_Saffire_Pro40()
+        F1.PhantomPower[0].Turn_On()
+        for channel in range(4):
+            self.assertFalse(F1.IsChannelUsingPhantomPower(channel + 5), "Phantom power not off.")
+
+    def test_Channels5thru8ReportTrueWhenPhantomPowerOn(self):
+        F1 = Focusrite_Saffire_Pro40()
+        F1.PhantomPower[1].Turn_On()
+        for channel in range(4):
+            self.assertTrue(F1.IsChannelUsingPhantomPower(channel + 5), "Phantom power not on.")
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.test_ValidateDefaultConstructor']

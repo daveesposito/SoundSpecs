@@ -35,6 +35,12 @@ class Focusrite_Saffire_Pro40(object):
         else:
             raise ValueError("Invalid channel provided.")
         
+    def IsChannelUsingPhantomPower(self, channel):
+        '''
+        For the given channel, returns true if phantom power is on, false if phantom power is off.
+        '''
+        return self._Get_Switch_Based_On_Channel(channel).Current_State()
+        
 class InputChannel(object):
     '''
     classdocs
