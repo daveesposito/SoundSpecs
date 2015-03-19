@@ -12,13 +12,14 @@ class Amplifier(object):
     classdocs
     '''
     
-    def __init__(self):
+    def __init__(self, connected_device=None):
         '''
         Constructor
         '''
         self.Clean = CleanChannel()
         self.Drive = DriveChannel()
         self.Master = MasterChannel()
+        self.ConnectedDevices = connected_device
         
     def Set_Clean_Channel(self, gain=None, bass=None, treble=None):
         if not gain is None:
