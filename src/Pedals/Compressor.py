@@ -10,7 +10,7 @@ class Compressor(object):
     classdocs
     '''
 
-    def __init__(self, threshold=0.0, tone=0.0, attack=0.0, level=0.0):
+    def __init__(self, threshold=0.0, tone=0.0, attack=0.0, level=0.0, connected_device=None):
         '''
         Constructor
         '''
@@ -39,6 +39,7 @@ class Compressor(object):
         self.Tone = Knob("Tone", current_position=tone_val)
         self.Attack = Knob("Attack", current_position=attack_val)
         self.Level = Knob("Level", current_position=level_val)
+        self.ConnectedDevice = connected_device
         
     def Turn_On(self):
         self.Active.Turn_On()

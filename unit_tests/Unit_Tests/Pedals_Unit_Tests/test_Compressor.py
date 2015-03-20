@@ -5,6 +5,7 @@ Created on Mar 16, 2015
 '''
 import unittest
 from Pedals.Compressor import Compressor
+from Instruments.GibsonSG import GibsonSG
 
 class Test(unittest.TestCase):
 
@@ -15,6 +16,7 @@ class Test(unittest.TestCase):
         self.assertEqual(C1.Tone.Current_Position(), 0.0, "Tone not correctly initialized.")
         self.assertEqual(C1.Attack.Current_Position(), 0.0, "Attack not correctly initialized.")
         self.assertEqual(C1.Level.Current_Position(), 0.0, "Level not correctly initialized.")
+        self.assertIsNone(C1.ConnectedDevice, "Device connected somehow.")
 
     def test_ConstructorWithCustomThreshold(self):
         C1 = Compressor(threshold=1.2)
@@ -32,6 +34,11 @@ class Test(unittest.TestCase):
         C1 = Compressor(level=7.8)
         self.assertEqual(C1.Level.Current_Position(), 7.8, "Level not correctly initialized.")
 
+    def test_ConstructorWithDevice(self):
+        G1 = GibsonSG()
+        C1 = Compressor(connected_device=G1)
+        self.assertIsInstance(C1.ConnectedDevice, GibsonSG)
+    
     def test_ConstructWithLowThresholdRaisesException(self):
         self.assertRaises(ValueError, Compressor, threshold=-1)
         
@@ -82,7 +89,6 @@ class Test(unittest.TestCase):
         C1.Turn_On()
         self.assertEqual(C1.Is_Active(), True, "Compressor not turned on.")
         self.assertEqual(C1.Get_Current_Active_State(), "On", "Active state is not ON.")
-    
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testValidateDefaultConstructor']

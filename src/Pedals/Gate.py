@@ -10,8 +10,7 @@ class Gate(object):
     classdocs
     '''
 
-
-    def __init__(self, threshold=0.0, decay=0.0):
+    def __init__(self, threshold=0.0, decay=0.0, connected_device=None):
         '''
         Constructor
         '''
@@ -29,6 +28,7 @@ class Gate(object):
         self.Mode = Switch("Mode", "Mute", "Gate", False)
         self.Threshold = Knob("Threshold", current_position=threshold_val)
         self.Decay = Knob("Decay", current_position=decay_val)
+        self.ConnectedDevice = connected_device
         
     def Turn_On(self):
         self.Active.Turn_On()
