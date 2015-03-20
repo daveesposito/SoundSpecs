@@ -6,7 +6,7 @@ Created on Mar 17, 2015
 
 class Mic(object):
     '''
-    classdocs
+    Generic abstraction for how a mic will be used with focus on mic placement and position.
     '''
 
     names = list()
@@ -29,6 +29,9 @@ class Mic(object):
         self.Placed = None
         
     def __del__(self):
+        '''
+        Handles removing the mic from the names list when the mic is destroyed.
+        '''
         if self.Name in self.names:
             self.names.remove(self.Name)
         

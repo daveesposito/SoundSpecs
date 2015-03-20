@@ -8,7 +8,7 @@ from Utilities.Controls import Switch
 
 class MK319(Mic):
     '''
-    classdocs
+    Models the switches on the MK319 condenser mic based on the generic mic model.
     '''
 
     def __init__(self, name, high_pass=False, pad=False):
