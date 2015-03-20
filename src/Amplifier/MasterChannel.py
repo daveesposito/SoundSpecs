@@ -7,7 +7,7 @@ from Utilities.Controls import Knob, Switch
 
 class MasterChannel(object):
     '''
-    classdocs
+    Defines controls in the master channel of the Marshall G80RCD amp.
     '''
 
     def __init__(self, volume=0.0, reverb=0.0, send_level=0.0):
@@ -35,10 +35,19 @@ class MasterChannel(object):
         self.Send_Level = Knob("Send Level", current_position=send_level_val)
         
     def Select_Drive(self):
+        '''
+        Sets the amp to use the drive channel.
+        '''
         self.ChannelSelect.Turn_Off()
         
     def Select_Clean(self):
+        '''
+        Sets the amp to use the clean channel.
+        '''
         self.ChannelSelect.Turn_On()
         
     def Current_Type(self):
+        '''
+        Determines which channel the amp is using.
+        '''
         return self.ChannelSelect.Current_State_Name()

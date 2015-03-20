@@ -14,21 +14,22 @@ class Test(unittest.TestCase):
 
     def test_ValidateDefaultConstructor(self):
         A1 = Amplifier()
-        self.assertIsNone(A1.ConnectedDevices, "Device connected.")
-        self.assertIsInstance(A1.Clean, CleanChannel, "CleanChannel not assigned.")
-        self.assertIsInstance(A1.Drive, DriveChannel, "DriveChannel not assigned.")
-        self.assertIsInstance(A1.Master, MasterChannel, "MasterChannel not assigned.")
+        self.assertIsNone(A1.ConnectedDevices)
+        self.assertIsInstance(A1.Clean, CleanChannel)
+        self.assertIsInstance(A1.Drive, DriveChannel)
+        self.assertIsInstance(A1.Master, MasterChannel)
 
     def test_ConstructorWithDevice(self):
         C1 = Compressor()
         A1 = Amplifier(C1)
-        self.assertIsInstance(A1.ConnectedDevices, Compressor, "Compressor not connected.")
+        self.assertIsInstance(A1.ConnectedDevices, Compressor)
 
     def test_SetCleanNone(self):
         A1 = Amplifier()
         A1.Set_Clean_Channel()
         self.assertEqual(A1.Clean.Gain.Current_Position(), 0.0)
         self.assertEqual(A1.Clean.Bass.Current_Position(), 0.0)
+        self.assertEqual(A1.Clean.Mid.Current_Position(), 0.0)
         self.assertEqual(A1.Clean.Treble.Current_Position(), 0.0)
         
     def test_SetCleanGain(self):
@@ -36,6 +37,7 @@ class Test(unittest.TestCase):
         A1.Set_Clean_Channel(gain=4)
         self.assertEqual(A1.Clean.Gain.Current_Position(), 4.0)
         self.assertEqual(A1.Clean.Bass.Current_Position(), 0.0)
+        self.assertEqual(A1.Clean.Mid.Current_Position(), 0.0)
         self.assertEqual(A1.Clean.Treble.Current_Position(), 0.0)
         
     def test_SetCleanBass(self):
@@ -43,6 +45,15 @@ class Test(unittest.TestCase):
         A1.Set_Clean_Channel(bass = 8)
         self.assertEqual(A1.Clean.Gain.Current_Position(), 0.0)
         self.assertEqual(A1.Clean.Bass.Current_Position(), 8.0)
+        self.assertEqual(A1.Clean.Mid.Current_Position(), 0.0)
+        self.assertEqual(A1.Clean.Treble.Current_Position(), 0.0)
+    
+    def test_SetCleanMid(self):
+        A1 = Amplifier()
+        A1.Set_Clean_Channel(mid=6.3)
+        self.assertEqual(A1.Clean.Gain.Current_Position(), 0.0)
+        self.assertEqual(A1.Clean.Bass.Current_Position(), 0.0)
+        self.assertEqual(A1.Clean.Mid.Current_Position(), 6.3)
         self.assertEqual(A1.Clean.Treble.Current_Position(), 0.0)
         
     def test_SetCleanTreble(self):
@@ -50,14 +61,16 @@ class Test(unittest.TestCase):
         A1.Set_Clean_Channel(treble=9.9)
         self.assertEqual(A1.Clean.Gain.Current_Position(), 0.0)
         self.assertEqual(A1.Clean.Bass.Current_Position(), 0.0)
+        self.assertEqual(A1.Clean.Mid.Current_Position(), 0.0)
         self.assertEqual(A1.Clean.Treble.Current_Position(), 9.9)
         
     def test_SetCleanAll(self):
         A1 = Amplifier()
-        A1.Set_Clean_Channel(1, 2, 3)
+        A1.Set_Clean_Channel(1, 2, 3, 4)
         self.assertEqual(A1.Clean.Gain.Current_Position(), 1)
         self.assertEqual(A1.Clean.Bass.Current_Position(), 2)
-        self.assertEqual(A1.Clean.Treble.Current_Position(), 3)
+        self.assertEqual(A1.Clean.Mid.Current_Position(), 3)
+        self.assertEqual(A1.Clean.Treble.Current_Position(), 4)
         
     def test_SetDriveNone(self):
         A1 = Amplifier()

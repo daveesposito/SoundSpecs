@@ -10,61 +10,61 @@ class Test(unittest.TestCase):
 
     def testDefaultConstructorValidation(self):
         Drive = DriveChannel()
-        self.assertEqual(Drive.Gain.Current_Position(), 0.0, "Failed to initialize Gain.")
-        self.assertEqual(Drive.Bass.Current_Position(), 0.0, "Failed to initialize Bass.")
-        self.assertEqual(Drive.Mid.Current_Position(), 0.0, "Failed to initialize Mid.")
-        self.assertEqual(Drive.Treble.Current_Position(), 0.0, "Failed to initialize Treble.")
-        self.assertEqual(Drive.Contour.Current_Position(), 0.0, "Failed to initialize Contour.")
-        self.assertEqual(Drive.Volume.Current_Position(), 0.0, "Failed to initialize Volume.")
+        self.assertEqual(Drive.Gain.Current_Position(), 0.0)
+        self.assertEqual(Drive.Bass.Current_Position(), 0.0)
+        self.assertEqual(Drive.Mid.Current_Position(), 0.0)
+        self.assertEqual(Drive.Treble.Current_Position(), 0.0)
+        self.assertEqual(Drive.Contour.Current_Position(), 0.0)
+        self.assertEqual(Drive.Volume.Current_Position(), 0.0)
 
     def testConstructorWithGainSetting(self):
         Drive = DriveChannel(gain=4)
-        self.assertEqual(Drive.Gain.Current_Position(), 4, "Failed to initialize Gain.")
+        self.assertEqual(Drive.Gain.Current_Position(), 4)
 
     def testConstructorWithBassSetting(self):
         Drive = DriveChannel(bass=5.1)
-        self.assertEqual(Drive.Bass.Current_Position(), 5.1, "Failed to initialize Bass.")
+        self.assertEqual(Drive.Bass.Current_Position(), 5.1)
     
     def testConstructorWithMidSetting(self):
         Drive = DriveChannel(mid=7.3)
-        self.assertEqual(Drive.Mid.Current_Position(), 7.3, "Failed to initialize Mid.")
+        self.assertEqual(Drive.Mid.Current_Position(), 7.3)
     
     def testConstructorWithTrebleSetting(self):
         Drive = DriveChannel(treble=9.9)
-        self.assertEqual(Drive.Treble.Current_Position(), 9.9, "Failed to initialize Treble.")
+        self.assertEqual(Drive.Treble.Current_Position(), 9.9)
         
     def testConstructorWithContourSetting(self):
         Drive = DriveChannel(contour=9)
-        self.assertEqual(Drive.Contour.Current_Position(), 9.0, "Failed to initialize Contour.")
+        self.assertEqual(Drive.Contour.Current_Position(), 9.0)
         
     def testConstructorWithVolumeSetting(self):
         Drive = DriveChannel(volume=4)
-        self.assertEqual(Drive.Volume.Current_Position(), 4, "Failed to initialize Volume.")
+        self.assertEqual(Drive.Volume.Current_Position(), 4)
         
     def testConstructorWithAllSettings(self):
         Drive = DriveChannel(8, 7, 3, 6, 5, 4)
-        self.assertEqual(Drive.Gain.Current_Position(), 8.0, "Failed to initialize Gain.")
-        self.assertEqual(Drive.Bass.Current_Position(), 7.0, "Failed to initialize Bass.")
-        self.assertEqual(Drive.Mid.Current_Position(), 3.0, "Failed to initialize Mid.")
-        self.assertEqual(Drive.Treble.Current_Position(), 6.0, "Failed to initialize Treble.")
-        self.assertEqual(Drive.Contour.Current_Position(), 5, "Failed to initialize Contour.")
-        self.assertEqual(Drive.Volume.Current_Position(), 4, "Failed to initialize Volume.")
+        self.assertEqual(Drive.Gain.Current_Position(), 8.0)
+        self.assertEqual(Drive.Bass.Current_Position(), 7.0)
+        self.assertEqual(Drive.Mid.Current_Position(), 3.0)
+        self.assertEqual(Drive.Treble.Current_Position(), 6.0)
+        self.assertEqual(Drive.Contour.Current_Position(), 5)
+        self.assertEqual(Drive.Volume.Current_Position(), 4)
     
     def testReadDefaultDriveType(self):
         Drive = DriveChannel()
-        self.assertEqual(Drive.Current_Type(), "OD1", "Failed to correctly initialize drive type.") 
+        self.assertEqual(Drive.Current_Type(), "OD1") 
     
     def testSelectOD2(self):
         Drive = DriveChannel()
         Drive.Select_OD2()
-        self.assertEqual(Drive.Current_Type(), "OD2", "Failed to set to OD2.")  
+        self.assertEqual(Drive.Current_Type(), "OD2")  
     
     def testSelectOD1(self):
         Drive = DriveChannel()
         Drive.Select_OD2()
-        self.assertEqual(Drive.Current_Type(), "OD2", "Failed to set to OD2.")
+        self.assertEqual(Drive.Current_Type(), "OD2")
         Drive.Select_OD1()
-        self.assertEqual(Drive.Current_Type(), "OD1", "Failed to set to OD1.") 
+        self.assertEqual(Drive.Current_Type(), "OD1") 
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testDefaultConstructorValidation']

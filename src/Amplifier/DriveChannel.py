@@ -7,7 +7,7 @@ from Utilities.Controls import Knob, Switch
 
 class DriveChannel(object):
     '''
-    classdocs
+    Defines controls in the drive channel of the Marshall G80RCD amp.
     '''
 
     def __init__(self, gain=0.0, bass=0.0, mid=0.0, treble=0.0, contour=0.0, volume=0.0):
@@ -53,10 +53,19 @@ class DriveChannel(object):
         self.Volume = Knob("Volume", current_position=volume_val)
         
     def Select_OD2(self):
+        '''
+        Set the channel to use the OD2 circuit.
+        '''
         self.DriveType.Turn_On()
         
     def Select_OD1(self):
+        '''
+        Set the channel to use the OD1 circuit.
+        '''
         self.DriveType.Turn_Off()
         
     def Current_Type(self):
+        '''
+        Determines which circuit the drive channel is using.
+        '''
         return self.DriveType.Current_State_Name()

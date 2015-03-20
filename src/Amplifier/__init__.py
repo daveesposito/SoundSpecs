@@ -9,27 +9,37 @@ from MasterChannel import MasterChannel
 
 class Amplifier(object):
     '''
-    classdocs
+    Models the controls on the Marshall G80RCD for storing signal chain settings.
     '''
     
     def __init__(self, connected_device=None):
         '''
-        Constructor
+        Creates all channels for this amp.
+        
+        connected_device should be assigned to the object that is connected at the input of the amp.
         '''
         self.Clean = CleanChannel()
         self.Drive = DriveChannel()
         self.Master = MasterChannel()
         self.ConnectedDevices = connected_device
         
-    def Set_Clean_Channel(self, gain=None, bass=None, treble=None):
+    def Set_Clean_Channel(self, gain=None, bass=None, mid=None, treble=None):
+        '''
+        Allows setting of any of the clean channel settings. These can also be set individually via child objects.
+        '''
         if not gain is None:
             self.Clean.Gain.Turn_To(gain)
         if not bass is None:
             self.Clean.Bass.Turn_To(bass)
+        if not mid is None:
+            self.Clean.Mid.Turn_To(mid)
         if not treble is None:
             self.Clean.Treble.Turn_To(treble)
         
     def Set_Drive_Channel(self, gain=None, bass=None, mid=None, treble=None, contour=None, volume=None):
+        '''
+        Allows setting of any of the drive channel settings. These can also be set individually via child objects.
+        '''
         if not gain is None:
             self.Drive.Gain.Turn_To(gain)
         if not bass is None:
@@ -44,11 +54,12 @@ class Amplifier(object):
             self.Drive.Volume.Turn_To(volume)
             
     def Set_Master_Channel(self, volume=None, reverb=None, send_level=None):
+        '''
+        Allows setting of any of the master channel settings. These can also be set individually via child objects.
+        '''
         if not volume is None:
             self.Master.Volume.Turn_To(volume)
         if not reverb is None:
             self.Master.Reverb.Turn_To(reverb)
         if not send_level is None:
             self.Master.Send_Level.Turn_To(send_level)
-            
-    
