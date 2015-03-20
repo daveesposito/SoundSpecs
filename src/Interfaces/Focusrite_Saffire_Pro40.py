@@ -10,18 +10,24 @@ class Focusrite_Saffire_Pro40(object):
     Simulates input / output channels of the Focusrite Saffire Pro40 audio interface.
     '''
 
-    def __init__(self):
+    def __init__(self, main_level=0.0, mic_level_1=0.0, mic_level_2=0.0):
         '''
         Constructor
         '''
         self.AnalogInputs = list()
+        self.AnalogOutputs = list()
         self.PhantomPower = list()
+        self.MicLevels = list()
         for n in range(8):
             self.AnalogInputs.append(InputChannel())
+            self.AnalogOutputs.append(OutputChannel())
             if n == 0 or n == 1:
                 self.AnalogInputs[n].Assign_Switches()
         self.PhantomPower.append(Switch("Bank 1 Phantom Power", current_state=False))
         self.PhantomPower.append(Switch("Bank 2 Phantom Power", current_state=False))
+        self.MainLevel = Knob("Main Level", current_position=main_level)
+        self.MicLevels.append(Knob("Mic 1 Level", current_position=mic_level_1))
+        self.MicLevels.append(Knob("Mic 2 Level", current_position=mic_level_2))
         
     def _Get_Switch_Based_On_Channel(self, channel):
         '''
@@ -41,6 +47,17 @@ class Focusrite_Saffire_Pro40(object):
         '''
         return self._Get_Switch_Based_On_Channel(channel).Current_State()
         
+class OutputChannel(object):
+    '''
+    Abstraction of a single output channel on the FSP40.
+    '''
+    
+    def __init__(self, level=0.0):
+        '''
+        Constructor
+        '''
+        self.Level = Knob("Level", current_position=level)
+
 class InputChannel(object):
     '''
     Abstraction of a single input channel on the FSP40.
@@ -48,7 +65,7 @@ class InputChannel(object):
     
     def __init__(self, level=0.0, connected_device=None):
         '''
-        constructor
+        Constructor
         '''
         self.Level = Knob("Level", current_position=level)
         self.ConnectedDevice = connected_device

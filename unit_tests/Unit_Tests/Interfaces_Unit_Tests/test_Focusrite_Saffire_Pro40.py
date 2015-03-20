@@ -11,9 +11,26 @@ class Test(unittest.TestCase):
     def test_ValidateDefaultConstructor(self):
         F1 = Focusrite_Saffire_Pro40()
         self.assertEqual(len(F1.AnalogInputs), 8)
+        self.assertEqual(len(F1.AnalogOutputs), 8)
         self.assertEqual(F1.AnalogInputs[0].Level.Current_Position(), 0)
+        self.assertEqual(F1.AnalogOutputs[0].Level.Current_Position(), 0)
         self.assertFalse(F1.PhantomPower[0].Current_State())
         self.assertFalse(F1.PhantomPower[1].Current_State())
+        self.assertEqual(F1.MainLevel.Current_Position(), 0)
+        self.assertEqual(F1.MicLevels[0].Current_Position(), 0)
+        self.assertEqual(F1.MicLevels[1].Current_Position(), 0)
+        
+    def test_ConstructorWithMainLevel(self):
+        F1 = Focusrite_Saffire_Pro40(main_level=3)
+        self.assertEqual(F1.MainLevel.Current_Position(), 3)
+        
+    def test_ConstructorWithMic1(self):
+        F1 = Focusrite_Saffire_Pro40(mic_level_1=4)
+        self.assertEqual(F1.MicLevels[0].Current_Position(), 4)
+        
+    def test_ConstructorWithMic2(self):
+        F1 = Focusrite_Saffire_Pro40(mic_level_2=5)
+        self.assertEqual(F1.MicLevels[1].Current_Position(), 5)
 
     def test_ConstructedInterfaceHasSwitchesOnChannels1And2(self):
         F1 = Focusrite_Saffire_Pro40()
@@ -65,6 +82,16 @@ class Test(unittest.TestCase):
         F1.PhantomPower[1].Turn_On()
         for channel in range(4):
             self.assertTrue(F1.IsChannelUsingPhantomPower(channel + 5))
+            
+    def test_SetOutputLevel(self):
+        F1 = Focusrite_Saffire_Pro40()
+        F1.AnalogOutputs[0].Level.Turn_To(5)
+        self.assertEqual(F1.AnalogOutputs[0].Level.Current_Position(), 5)
+        
+    def test_SetInputLevel(self):
+        F1 = Focusrite_Saffire_Pro40()
+        F1.AnalogInputs[0].Level.Turn_To(5)
+        self.assertEqual(F1.AnalogInputs[0].Level.Current_Position(), 5)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.test_ValidateDefaultConstructor']
