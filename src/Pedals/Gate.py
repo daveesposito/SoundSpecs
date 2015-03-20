@@ -8,10 +8,9 @@ from Utilities.Controls import Knob, Switch
 class Gate(object):
     '''
     Models controls on Boss Noise Gate pedal.
-    @todo: fix parameters to match control names on pedal.
     '''
 
-    def __init__(self, threshold=0.0, decay=0.0, connected_device=None):
+    def __init__(self, threshold=0.0, decay=0.0, connected_device=None, return_input=None):
         '''
         Constructor
         '''
@@ -30,6 +29,8 @@ class Gate(object):
         self.Threshold = Knob("Threshold", current_position=threshold_val)
         self.Decay = Knob("Decay", current_position=decay_val)
         self.ConnectedDevice = connected_device
+        self.Send = Send()
+        self.Return = return_input
         
     def Turn_On(self):
         '''
@@ -72,3 +73,11 @@ class Gate(object):
         "Mute" if in mute mode. "Gate" if in gate mode.
         '''
         return self.Mode.Current_State_Name()
+    
+class Send(object):
+    '''
+    Send object for the effects loop of the noise gate.  This is what will attach to other input devices.
+    '''
+    
+    def __init__(self):
+        pass

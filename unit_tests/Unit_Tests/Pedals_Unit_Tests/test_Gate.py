@@ -6,6 +6,7 @@ Created on Mar 16, 2015
 import unittest
 from Pedals.Gate import Gate
 from Pedals.Compressor import Compressor
+from Pedals.Gate import Send
 
 class Test(unittest.TestCase):
 
@@ -29,6 +30,11 @@ class Test(unittest.TestCase):
         C1 = Compressor()
         G1 = Gate(connected_device=C1)
         self.assertIsInstance(G1.ConnectedDevice, Compressor)
+        
+    def test_ConstructorWithReturn(self):
+        C1 = Compressor()
+        G1 = Gate(return_input=C1)
+        self.assertIsInstance(G1.Return, Compressor)
 
     def test_ConstructWithLowThresholdRaisesException(self):
         self.assertRaises(ValueError, Gate, threshold=-1)
@@ -74,6 +80,12 @@ class Test(unittest.TestCase):
         self.assertEqual(G1.Get_Current_Mode(), "Mute")
         G1.Set_Mode_To_Gate()
         self.assertEqual(G1.Get_Current_Mode(), "Gate")
+        
+    def test_AssignOtherInputToSend(self):
+        C1 = Compressor()
+        G1 = Gate()
+        C1.ConnectedDevice = G1.Send
+        self.assertIsInstance(C1.ConnectedDevice, Send)
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testValidateDefaultConstructor']

@@ -8,17 +8,16 @@ from Utilities.Controls import Knob, Switch
 class Compressor(object):
     '''
     Models controls for Boss compressor pedal.
-    @todo: fix parameters to match control names on pedal.
     '''
 
-    def __init__(self, threshold=0.0, tone=0.0, attack=0.0, level=0.0, connected_device=None):
+    def __init__(self, level=0.0, tone=0.0, attack=0.0, sustain=0.0, connected_device=None):
         '''
         Constructor
         '''
         try:
-            threshold_val = float(threshold)
+            level_val = float(level)
         except:
-            raise TypeError("Invalid threshold value: " + str(threshold))
+            raise TypeError("Invalid level value: " + str(level))
         
         try:
             tone_val = float(tone)
@@ -31,15 +30,15 @@ class Compressor(object):
             raise TypeError("Invalid attack value: " + str(attack))
         
         try:
-            level_val = float(level)
+            sustain_val = float(sustain)
         except:
-            raise TypeError("Invalid level value: " + str(level))
+            raise TypeError("Invalid sustain value: " + str(sustain))
         
         self.Active = Switch("Active", "On", "Off", False)
-        self.Threshold = Knob("Threshold", current_position=threshold_val)
+        self.Level = Knob("Level", current_position=level_val)
         self.Tone = Knob("Tone", current_position=tone_val)
         self.Attack = Knob("Attack", current_position=attack_val)
-        self.Level = Knob("Level", current_position=level_val)
+        self.Sustain = Knob("Threshold", current_position=sustain_val)
         self.ConnectedDevice = connected_device
         
     def Turn_On(self):
