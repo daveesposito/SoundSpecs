@@ -27,6 +27,9 @@ class Knob(object):
         self._current_position = new_position
         
     def Current_Position(self):
+        '''
+        Returns the current position of the knob.
+        '''
         return self._current_position
         
     def _validate_provided_position(self, position):

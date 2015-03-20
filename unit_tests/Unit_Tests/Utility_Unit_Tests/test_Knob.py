@@ -10,10 +10,10 @@ class Test(unittest.TestCase):
 
     def testDefaultConstructorValidation(self):
         Volume = Knob("Volume")
-        self.assertEqual(Volume.Name, "Volume", "Volume not correctly initialized.")
-        self.assertEqual(Volume._min_value, 0.0, "Minimum value not correctly initialized.")
-        self.assertEqual(Volume._max_value, 10.0, "Maximum value not correctly initialized.")
-        self.assertEqual(Volume._current_position, 0.0, "Current position value not correctly initialized.")
+        self.assertEqual(Volume.Name, "Volume")
+        self.assertEqual(Volume._min_value, 0.0)
+        self.assertEqual(Volume._max_value, 10.0)
+        self.assertEqual(Volume._current_position, 0.0)
         
     def test_ConstructorCannotTakePositionBelowMin(self):
         self.assertRaises(ValueError, Knob, "Volume", current_position=-1)
@@ -37,7 +37,7 @@ class Test(unittest.TestCase):
         Volume = Knob("Volume")
         for setting in range(int(Volume._max_value)+1):
             Volume.Turn_To(setting)
-            self.assertEqual(Volume._current_position, setting, "Failed to change value.")
+            self.assertEqual(Volume._current_position, setting)
             
     def test_TurnToWithValidTooLargeRaisesException(self):
         Volume = Knob("Volume")
@@ -50,7 +50,7 @@ class Test(unittest.TestCase):
     def test_GetCurrentPositionReturnsCorrectPosition(self):
         Volume = Knob("Volume")
         Volume.Turn_To(6.6)
-        self.assertEqual(Volume.Current_Position(), 6.6, "Current position didn't get updated.")
+        self.assertEqual(Volume.Current_Position(), 6.6)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testDefaultConstructorValidation']
