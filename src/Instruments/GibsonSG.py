@@ -7,7 +7,7 @@ from Utilities.Controls import Knob, Multiselect
 
 class GibsonSG(object):
     '''
-    classdocs
+    Models controls on the Gibson SG Special.
     '''
 
     def __init__(self, bridge_volume=10.0, bridge_tone=10.0, neck_volume=10.0, neck_tone=10.0, pickup="Bridge"):

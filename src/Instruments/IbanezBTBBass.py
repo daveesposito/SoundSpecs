@@ -7,7 +7,7 @@ from Utilities.Controls import Knob
 
 class IbanazBTBBass(object):
     '''
-    classdocs
+    Models controls on the Ibanez BTB Bass.
     '''
 
     def __init__(self, volume=10.0, pickup=0.0, bass=0.0, mid=0.0, treble=0.0):
