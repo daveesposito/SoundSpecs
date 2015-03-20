@@ -7,7 +7,7 @@ from Utilities.Controls import Switch, Knob
 
 class Focusrite_Saffire_Pro40(object):
     '''
-    classdocs
+    Simulates input / output channels of the Focusrite Saffire Pro40 audio interface.
     '''
 
     def __init__(self):
@@ -43,7 +43,7 @@ class Focusrite_Saffire_Pro40(object):
         
 class InputChannel(object):
     '''
-    classdocs
+    Abstraction of a single input channel on the FSP40.
     '''
     
     def __init__(self, level=0.0, connected_device=None):
