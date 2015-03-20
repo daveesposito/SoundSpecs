@@ -7,7 +7,8 @@ from Utilities.Controls import Knob, Switch
 
 class Compressor(object):
     '''
-    classdocs
+    Models controls for Boss compressor pedal.
+    @todo: fix parameters to match control names on pedal.
     '''
 
     def __init__(self, threshold=0.0, tone=0.0, attack=0.0, level=0.0, connected_device=None):
@@ -42,13 +43,25 @@ class Compressor(object):
         self.ConnectedDevice = connected_device
         
     def Turn_On(self):
+        '''
+        Turns compressor on.
+        '''
         self.Active.Turn_On()
         
     def Turn_Off(self):
+        '''
+        Turns compressor off.
+        '''
         self.Active.Turn_Off()
     
     def Is_Active(self):
+        '''
+        True if compressor is on.  False if compressor is off.
+        '''
         return self.Active.Current_State()
     
     def Get_Current_Active_State(self):
+        '''
+        "On" if compressor is on.  "Off" if compressor is off.
+        '''
         return self.Active.Current_State_Name()

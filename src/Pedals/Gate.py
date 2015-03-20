@@ -7,7 +7,8 @@ from Utilities.Controls import Knob, Switch
 
 class Gate(object):
     '''
-    classdocs
+    Models controls on Boss Noise Gate pedal.
+    @todo: fix parameters to match control names on pedal.
     '''
 
     def __init__(self, threshold=0.0, decay=0.0, connected_device=None):
@@ -31,22 +32,43 @@ class Gate(object):
         self.ConnectedDevice = connected_device
         
     def Turn_On(self):
+        '''
+        Activates pedal function.
+        '''
         self.Active.Turn_On()
         
     def Turn_Off(self):
+        '''
+        Deactivates pedal function.
+        '''
         self.Active.Turn_Off()
     
     def Is_Active(self):
+        '''
+        True if gate is active.  False if gate is inactive.
+        '''
         return self.Active.Current_State()
     
     def Get_Current_Active_State(self):
+        '''
+        "On" if gate is active.  "Off" if gate is inactive.
+        '''
         return self.Active.Current_State_Name()
     
     def Set_Mode_To_Mute(self):
+        '''
+        Sets mode switch to Mute.
+        '''
         self.Mode.Turn_On()
         
     def Set_Mode_To_Gate(self):
+        '''
+        Sets mode switch to Reduction.
+        '''
         self.Mode.Turn_Off()
         
     def Get_Current_Mode(self):
+        '''
+        "Mute" if in mute mode. "Gate" if in gate mode.
+        '''
         return self.Mode.Current_State_Name()

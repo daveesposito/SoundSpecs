@@ -11,28 +11,28 @@ class Test(unittest.TestCase):
 
     def test_ValidateDefaultConstructor(self):
         C1 = Compressor()
-        self.assertEqual(C1.Get_Current_Active_State(), "Off", "Compressor not initialized to OFF")
-        self.assertEqual(C1.Threshold.Current_Position(), 0.0, "Threshold not correctly initialized.")
-        self.assertEqual(C1.Tone.Current_Position(), 0.0, "Tone not correctly initialized.")
-        self.assertEqual(C1.Attack.Current_Position(), 0.0, "Attack not correctly initialized.")
-        self.assertEqual(C1.Level.Current_Position(), 0.0, "Level not correctly initialized.")
-        self.assertIsNone(C1.ConnectedDevice, "Device connected somehow.")
+        self.assertEqual(C1.Get_Current_Active_State(), "Off")
+        self.assertEqual(C1.Threshold.Current_Position(), 0.0)
+        self.assertEqual(C1.Tone.Current_Position(), 0.0)
+        self.assertEqual(C1.Attack.Current_Position(), 0.0)
+        self.assertEqual(C1.Level.Current_Position(), 0.0)
+        self.assertIsNone(C1.ConnectedDevice)
 
     def test_ConstructorWithCustomThreshold(self):
         C1 = Compressor(threshold=1.2)
-        self.assertEqual(C1.Threshold.Current_Position(), 1.2, "Threshold not correctly initialized.")
+        self.assertEqual(C1.Threshold.Current_Position(), 1.2)
         
     def test_ConstructorWithCustomTone(self):
         C1 = Compressor(tone=3.4)
-        self.assertEqual(C1.Tone.Current_Position(), 3.4, "Tone not correctly initialized.")
+        self.assertEqual(C1.Tone.Current_Position(), 3.4)
         
     def test_ConstructorWithCustomAttack(self):
         C1 = Compressor(attack=5.6)
-        self.assertEqual(C1.Attack.Current_Position(), 5.6, "Attack not correctly initialized.")
+        self.assertEqual(C1.Attack.Current_Position(), 5.6)
         
     def test_ConstructorWithCustomLevel(self):
         C1 = Compressor(level=7.8)
-        self.assertEqual(C1.Level.Current_Position(), 7.8, "Level not correctly initialized.")
+        self.assertEqual(C1.Level.Current_Position(), 7.8)
 
     def test_ConstructorWithDevice(self):
         G1 = GibsonSG()
@@ -78,17 +78,17 @@ class Test(unittest.TestCase):
     def test_Turn_Off_Deactivates_Compressor(self):
         C1 = Compressor()
         C1.Turn_Off()
-        self.assertEqual(C1.Is_Active(), False, "Compressor not turned off.")
-        self.assertEqual(C1.Get_Current_Active_State(), "Off", "Active state is not OFF.")
+        self.assertEqual(C1.Is_Active(), False)
+        self.assertEqual(C1.Get_Current_Active_State(), "Off")
         
     def test_Turn_On_Activates_Compressor(self):
         C1 = Compressor()
         C1.Turn_Off()
-        self.assertEqual(C1.Is_Active(), False, "Compressor not turned off.")
-        self.assertEqual(C1.Get_Current_Active_State(), "Off", "Active state is not OFF.")
+        self.assertEqual(C1.Is_Active(), False)
+        self.assertEqual(C1.Get_Current_Active_State(), "Off")
         C1.Turn_On()
-        self.assertEqual(C1.Is_Active(), True, "Compressor not turned on.")
-        self.assertEqual(C1.Get_Current_Active_State(), "On", "Active state is not ON.")
+        self.assertEqual(C1.Is_Active(), True)
+        self.assertEqual(C1.Get_Current_Active_State(), "On")
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testValidateDefaultConstructor']
