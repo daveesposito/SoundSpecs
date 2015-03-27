@@ -4,7 +4,7 @@ Created on Mar 18, 2015
 @author: desposito
 '''
 import unittest
-from Interfaces.Focusrite_Saffire_Pro40 import Focusrite_Saffire_Pro40
+from model.Interfaces.Focusrite_Saffire_Pro40 import Focusrite_Saffire_Pro40
 
 class Test(unittest.TestCase):
 

@@ -4,7 +4,7 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 import unittest
-from Utilities.Controls import Knob
+from model.Utilities.Controls import Knob
 
 class Test(unittest.TestCase):
 

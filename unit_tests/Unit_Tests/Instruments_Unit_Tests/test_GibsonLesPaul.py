@@ -4,7 +4,7 @@ Created on Mar 17, 2015
 @author: desposito
 '''
 import unittest
-from Instruments.GibsonLesPaul import GibsonLesPaul
+from model.Instruments.GibsonLesPaul import GibsonLesPaul
 
 class Test(unittest.TestCase):
 

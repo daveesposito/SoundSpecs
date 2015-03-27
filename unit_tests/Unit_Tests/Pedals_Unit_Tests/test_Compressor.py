@@ -4,8 +4,8 @@ Created on Mar 16, 2015
 @author: desposito
 '''
 import unittest
-from Pedals.Compressor import Compressor
-from Instruments.GibsonSG import GibsonSG
+from model.Pedals.Compressor import Compressor
+from model.Instruments.GibsonSG import GibsonSG
 
 class Test(unittest.TestCase):
 

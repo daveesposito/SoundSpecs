@@ -4,8 +4,8 @@ Created on Mar 18, 2015
 @author: Dave
 '''
 import unittest
-from Interfaces.Focusrite_Saffire_Pro40 import InputChannel
-from Mics.SM57 import SM57
+from model.Interfaces.Focusrite_Saffire_Pro40 import InputChannel
+from model.Mics.SM57 import SM57
 
 class Test(unittest.TestCase):
 

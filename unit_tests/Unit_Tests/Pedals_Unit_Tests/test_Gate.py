@@ -4,9 +4,9 @@ Created on Mar 16, 2015
 @author: desposito
 '''
 import unittest
-from Pedals.Gate import Gate
-from Pedals.Compressor import Compressor
-from Pedals.Gate import Send
+from model.Pedals.Gate import Gate
+from model.Pedals.Compressor import Compressor
+from model.Pedals.Gate import Send
 
 class Test(unittest.TestCase):
 

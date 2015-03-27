@@ -3,8 +3,8 @@ Created on Mar 18, 2015
 
 @author: desposito
 '''
-from Mics.Mic import Mic
-from Utilities.Controls import Switch
+from model.Mics.Mic import Mic
+from model.Utilities.Controls import Switch
 
 class MK319(Mic):
     '''

@@ -4,8 +4,8 @@ Created on Mar 19, 2015
 @author: desposito
 '''
 import unittest
-from Interfaces.IMP2 import IMP2
-from Pedals.Gate import Gate
+from model.Interfaces.IMP2 import IMP2
+from model.Pedals.Gate import Gate
 
 class Test(unittest.TestCase):
 

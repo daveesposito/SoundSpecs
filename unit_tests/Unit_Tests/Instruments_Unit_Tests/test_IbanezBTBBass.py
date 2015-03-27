@@ -4,7 +4,7 @@ Created on Mar 17, 2015
 @author: desposito
 '''
 import unittest
-from Instruments.IbanezBTBBass import IbanazBTBBass
+from model.Instruments.IbanezBTBBass import IbanazBTBBass
 
 class Test(unittest.TestCase):
 

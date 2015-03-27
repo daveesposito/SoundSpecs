@@ -4,7 +4,7 @@ Created on Mar 17, 2015
 @author: desposito
 '''
 import unittest
-from Utilities.Controls import Multiselect
+from model.Utilities.Controls import Multiselect
 
 class Test(unittest.TestCase):
 

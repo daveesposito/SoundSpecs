@@ -4,7 +4,7 @@ Created on Mar 18, 2015
 @author: desposito
 '''
 import unittest
-from Mics.SM57 import SM57
+from model.Mics.SM57 import SM57
 
 class Test(unittest.TestCase):
 

@@ -3,7 +3,7 @@ Created on Mar 18, 2015
 
 @author: desposito
 '''
-from Utilities.Controls import Switch, Knob
+from model.Utilities.Controls import Switch, Knob
 
 class Focusrite_Saffire_Pro40(object):
     '''

@@ -4,7 +4,7 @@ Created on Mar 17, 2015
 @author: desposito
 '''
 import unittest
-from Instruments.GibsonSG import GibsonSG
+from model.Instruments.GibsonSG import GibsonSG
 
 class Test(unittest.TestCase):
 

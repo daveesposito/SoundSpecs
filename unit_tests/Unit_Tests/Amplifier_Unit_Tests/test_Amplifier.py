@@ -4,11 +4,11 @@ Created on Mar 19, 2015
 @author: desposito
 '''
 import unittest
-from Amplifier import Amplifier
-from Amplifier.CleanChannel import CleanChannel
-from Amplifier.DriveChannel import DriveChannel
-from Amplifier.MasterChannel import MasterChannel
-from Pedals.Compressor import Compressor
+from model.Amplifier import Amplifier
+from model.Amplifier.CleanChannel import CleanChannel
+from model.Amplifier.DriveChannel import DriveChannel
+from model.Amplifier.MasterChannel import MasterChannel
+from model.Pedals.Compressor import Compressor
 
 class Test(unittest.TestCase):
 

@@ -4,7 +4,7 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 import unittest
-from Amplifier.DriveChannel import DriveChannel
+from model.Amplifier.DriveChannel import DriveChannel
 
 class Test(unittest.TestCase):
 

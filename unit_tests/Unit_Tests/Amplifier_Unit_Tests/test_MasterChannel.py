@@ -4,7 +4,7 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 import unittest
-from Amplifier.MasterChannel import MasterChannel
+from model.Amplifier.MasterChannel import MasterChannel
 
 class Test(unittest.TestCase):
 

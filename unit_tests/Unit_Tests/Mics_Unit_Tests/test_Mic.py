@@ -4,7 +4,7 @@ Created on Mar 18, 2015
 @author: desposito
 '''
 import unittest
-from Mics.Mic import Mic
+from model.Mics.Mic import Mic
 
 class Test(unittest.TestCase):
 

@@ -4,7 +4,7 @@ Created on Mar 17, 2015
 @author: desposito
 '''
 import unittest
-from Instruments.SuzukiM import SuzukiM
+from model.Instruments.SuzukiM import SuzukiM
 
 class Test(unittest.TestCase):
 

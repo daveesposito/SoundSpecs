@@ -4,7 +4,7 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 import unittest
-from Amplifier.CleanChannel import CleanChannel
+from model.Amplifier.CleanChannel import CleanChannel
 
 class Test(unittest.TestCase):
 

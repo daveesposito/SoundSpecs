@@ -3,7 +3,7 @@ Created on Mar 17, 2015
 
 @author: desposito
 '''
-from Utilities.Controls import Knob, Multiselect
+from model.Utilities.Controls import Knob, Multiselect
 
 class SuzukiM(object):
     '''
