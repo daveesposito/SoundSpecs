@@ -4,13 +4,14 @@ Created on Mar 16, 2015
 @author: desposito
 '''
 from model.Utilities.Controls import Knob, Switch
+from model.Utilities.Connection import Connection
 
-class Gate(object):
+class Gate():
     '''
     Models controls on Boss Noise Gate pedal.
     '''
 
-    def __init__(self, threshold=0.0, decay=0.0, connected_device=None, return_input=None):
+    def __init__(self, threshold=0.0, decay=0.0):
         '''
         Constructor
         '''
@@ -28,9 +29,9 @@ class Gate(object):
         self.Mode = Switch("Mode", "Mute", "Gate", False)
         self.Threshold = Knob("Threshold", current_position=threshold_val)
         self.Decay = Knob("Decay", current_position=decay_val)
-        self.ConnectedDevice = connected_device
-        self.Send = Send()
-        self.Return = return_input
+        self.ConnectedDevice = Connection("Input")
+        self.Send = Send("Send")
+        self.Return = Connection("Return")
         
     def Turn_On(self):
         '''
@@ -74,10 +75,10 @@ class Gate(object):
         '''
         return self.Mode.Current_State_Name()
     
-class Send(object):
+class Send():
     '''
     Send object for the effects loop of the noise gate.  This is what will attach to other input devices.
     '''
     
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.Name = name

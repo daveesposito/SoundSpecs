@@ -5,7 +5,7 @@ Created on Mar 17, 2015
 '''
 from model.Utilities.Controls import Knob, Multiselect
 
-class GibsonLesPaul(object):
+class GibsonLesPaul():
     '''
     Models controls on the Gibson Les Paul.
     '''

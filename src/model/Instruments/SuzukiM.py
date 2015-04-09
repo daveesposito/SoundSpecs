@@ -5,7 +5,7 @@ Created on Mar 17, 2015
 '''
 from model.Utilities.Controls import Knob, Multiselect
 
-class SuzukiM(object):
+class SuzukiM():
     '''
     Models controls on the Suzuki M.
     '''

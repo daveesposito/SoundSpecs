@@ -6,13 +6,14 @@ Created on Mar 13, 2015
 from CleanChannel import CleanChannel
 from DriveChannel import DriveChannel
 from MasterChannel import MasterChannel
+from model.Utilities.Connection import Connection
 
 class Amplifier(object):
     '''
     Models the controls on the Marshall G80RCD for storing signal chain settings.
     '''
     
-    def __init__(self, connected_device=None):
+    def __init__(self):
         '''
         Creates all channels for this amp.
         
@@ -21,7 +22,7 @@ class Amplifier(object):
         self.Clean = CleanChannel()
         self.Drive = DriveChannel()
         self.Master = MasterChannel()
-        self.ConnectedDevices = connected_device
+        self.ConnectedDevices = Connection()
         
     def Set_Clean_Channel(self, gain=None, bass=None, mid=None, treble=None):
         '''

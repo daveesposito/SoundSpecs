@@ -5,25 +5,19 @@ Created on Mar 18, 2015
 '''
 import unittest
 from model.Interfaces.Focusrite_Saffire_Pro40 import InputChannel
-from model.Mics.SM57 import SM57
 
 class Test(unittest.TestCase):
 
     def test_ValidateDefaultConstructor(self):
         C1 = InputChannel()
         self.assertEqual(C1.Level.Current_Position(), 0.0)
-        self.assertIsNone(C1.ConnectedDevice)
+        self.assertIsNone(C1.ConnectedDevice.Device)
         self.assertIsNone(C1.InstrumentSwitch)
         self.assertIsNone(C1.PadSwitch)
         
     def test_ConstructorWithLevel(self):
         C1 = InputChannel(level=3.4)
         self.assertEqual(C1.Level.Current_Position(), 3.4)
-        
-    def test_ConstructorWithDevice(self):
-        M1 = SM57("SM57A")
-        C1 = InputChannel(connected_device=M1)
-        self.assertIsInstance(C1.ConnectedDevice, SM57)
         
     def test_AssignSwitches(self):
         C1 = InputChannel()

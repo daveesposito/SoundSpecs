@@ -4,7 +4,7 @@ Created on Mar 27, 2015
 @author: desposito
 '''
 
-class SignalChain(object):
+class SignalChain():
     '''
     Provides functionality for creating signal chain parameters including all equipment involved in the chain.
     '''

@@ -4,7 +4,7 @@ Created on Mar 17, 2015
 @author: desposito
 '''
 
-class Mic(object):
+class Mic():
     '''
     Generic abstraction for how a mic will be used with focus on mic placement and position.
     '''

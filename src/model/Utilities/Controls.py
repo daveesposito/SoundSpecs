@@ -4,7 +4,7 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 
-class Knob(object):
+class Knob():
     '''
     Generic knob object. Tracks name, min, max and current position.
     '''
@@ -44,7 +44,7 @@ class Knob(object):
         if position_value < self._min_value or position_value > self._max_value:
             raise ValueError("The provided knob position is outside of the allowable range for this knob. Provided: {0} / Min: {1} / Max: {2}".format(position, self._min_value, self._max_value))
         
-class Switch(object):
+class Switch():
     '''
     Generic switch object.  Tracks name, on_value, off_value and current_state.
     '''
@@ -94,7 +94,7 @@ class Switch(object):
         else:
             return self._false_value
         
-class Multiselect(object):
+class Multiselect():
     '''
     Multiselect switch useful for things like guitar pickup selectors.
     '''

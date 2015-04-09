@@ -5,7 +5,7 @@ Created on Mar 13, 2015
 '''
 from model.Utilities.Controls import Knob, Switch
 
-class CleanChannel(object):
+class CleanChannel():
     '''
     Defines controls in the clean channel of the Marshall G80RCD amp.
     '''

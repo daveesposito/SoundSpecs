@@ -4,13 +4,14 @@ Created on Mar 16, 2015
 @author: desposito
 '''
 from model.Utilities.Controls import Knob, Switch
+from model.Utilities.Connection import Connection
 
-class Compressor(object):
+class Compressor():
     '''
     Models controls for Boss compressor pedal.
     '''
 
-    def __init__(self, level=0.0, tone=0.0, attack=0.0, sustain=0.0, connected_device=None):
+    def __init__(self, level=0.0, tone=0.0, attack=0.0, sustain=0.0):
         '''
         Constructor
         '''
@@ -39,7 +40,7 @@ class Compressor(object):
         self.Tone = Knob("Tone", current_position=tone_val)
         self.Attack = Knob("Attack", current_position=attack_val)
         self.Sustain = Knob("Threshold", current_position=sustain_val)
-        self.ConnectedDevice = connected_device
+        self.ConnectedDevice = Connection()
         
     def Turn_On(self):
         '''

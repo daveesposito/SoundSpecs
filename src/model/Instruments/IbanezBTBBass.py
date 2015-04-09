@@ -5,7 +5,7 @@ Created on Mar 17, 2015
 '''
 from model.Utilities.Controls import Knob
 
-class IbanazBTBBass(object):
+class IbanezBTBBass():
     '''
     Models controls on the Ibanez BTB Bass.
     '''

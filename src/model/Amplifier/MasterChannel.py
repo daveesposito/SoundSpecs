@@ -5,7 +5,7 @@ Created on Mar 13, 2015
 '''
 from model.Utilities.Controls import Knob, Switch
 
-class MasterChannel(object):
+class MasterChannel():
     '''
     Defines controls in the master channel of the Marshall G80RCD amp.
     '''

@@ -8,21 +8,15 @@ from model.Amplifier import Amplifier
 from model.Amplifier.CleanChannel import CleanChannel
 from model.Amplifier.DriveChannel import DriveChannel
 from model.Amplifier.MasterChannel import MasterChannel
-from model.Pedals.Compressor import Compressor
 
 class Test(unittest.TestCase):
 
     def test_ValidateDefaultConstructor(self):
         A1 = Amplifier()
-        self.assertIsNone(A1.ConnectedDevices)
+        self.assertIsNone(A1.ConnectedDevices.Device)
         self.assertIsInstance(A1.Clean, CleanChannel)
         self.assertIsInstance(A1.Drive, DriveChannel)
         self.assertIsInstance(A1.Master, MasterChannel)
-
-    def test_ConstructorWithDevice(self):
-        C1 = Compressor()
-        A1 = Amplifier(C1)
-        self.assertIsInstance(A1.ConnectedDevices, Compressor)
 
     def test_SetCleanNone(self):
         A1 = Amplifier()

@@ -5,7 +5,6 @@ Created on Mar 16, 2015
 '''
 import unittest
 from model.Pedals.Compressor import Compressor
-from model.Instruments.GibsonSG import GibsonSG
 
 class Test(unittest.TestCase):
 
@@ -16,7 +15,7 @@ class Test(unittest.TestCase):
         self.assertEqual(C1.Tone.Current_Position(), 0.0)
         self.assertEqual(C1.Attack.Current_Position(), 0.0)
         self.assertEqual(C1.Sustain.Current_Position(), 0.0)
-        self.assertIsNone(C1.ConnectedDevice)
+        self.assertIsNone(C1.ConnectedDevice.Device)
     
     def test_ConstructorWithCustomLevel(self):
         C1 = Compressor(level=7.8)
@@ -33,11 +32,6 @@ class Test(unittest.TestCase):
     def test_ConstructorWithCustomSustain(self):
         C1 = Compressor(sustain=1.2)
         self.assertEqual(C1.Sustain.Current_Position(), 1.2)
-
-    def test_ConstructorWithDevice(self):
-        G1 = GibsonSG()
-        C1 = Compressor(connected_device=G1)
-        self.assertIsInstance(C1.ConnectedDevice, GibsonSG)
     
     def test_ConstructWithLowLevelRaisesException(self):
         self.assertRaises(ValueError, Compressor, level=-1)

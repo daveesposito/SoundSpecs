@@ -16,7 +16,8 @@ class Test(unittest.TestCase):
         self.assertEqual(G1.Get_Current_Mode(), "Gate")
         self.assertEqual(G1.Threshold.Current_Position(), 0.0)
         self.assertEqual(G1.Decay.Current_Position(), 0.0)
-        self.assertIsNone(G1.ConnectedDevice)
+        self.assertIsNone(G1.ConnectedDevice.Device)
+        self.assertIsNone(G1.Return.Device)
         
     def test_ConstructWithCustomThreshold(self):
         G1 = Gate(threshold=3.4)
@@ -25,16 +26,6 @@ class Test(unittest.TestCase):
     def test_ConstructWithCustomDecay(self):
         G1 = Gate(decay=5.6)
         self.assertEqual(G1.Decay.Current_Position(), 5.6)
-
-    def test_ConstructorWithDevice(self):
-        C1 = Compressor()
-        G1 = Gate(connected_device=C1)
-        self.assertIsInstance(G1.ConnectedDevice, Compressor)
-        
-    def test_ConstructorWithReturn(self):
-        C1 = Compressor()
-        G1 = Gate(return_input=C1)
-        self.assertIsInstance(G1.Return, Compressor)
 
     def test_ConstructWithLowThresholdRaisesException(self):
         self.assertRaises(ValueError, Gate, threshold=-1)

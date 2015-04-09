@@ -5,7 +5,7 @@ Created on Mar 17, 2015
 '''
 from model.Utilities.Controls import Knob, Multiselect
 
-class GibsonSG(object):
+class GibsonSG():
     '''
     Models controls on the Gibson SG Special.
     '''

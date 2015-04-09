@@ -4,8 +4,9 @@ Created on Mar 18, 2015
 @author: desposito
 '''
 from model.Utilities.Controls import Switch, Knob
+from model.Utilities.Connection import Connection
 
-class Focusrite_Saffire_Pro40(object):
+class Focusrite_Saffire_Pro40():
     '''
     Simulates input / output channels of the Focusrite Saffire Pro40 audio interface.
     '''
@@ -47,7 +48,7 @@ class Focusrite_Saffire_Pro40(object):
         '''
         return self._Get_Switch_Based_On_Channel(channel).Current_State()
         
-class OutputChannel(object):
+class OutputChannel():
     '''
     Abstraction of a single output channel on the FSP40.
     '''
@@ -58,17 +59,17 @@ class OutputChannel(object):
         '''
         self.Level = Knob("Level", current_position=level)
 
-class InputChannel(object):
+class InputChannel():
     '''
     Abstraction of a single input channel on the FSP40.
     '''
     
-    def __init__(self, level=0.0, connected_device=None):
+    def __init__(self, level=0.0):
         '''
         Constructor
         '''
         self.Level = Knob("Level", current_position=level)
-        self.ConnectedDevice = connected_device
+        self.ConnectedDevice = Connection()
         self.InstrumentSwitch = None
         self.PadSwitch = None
         
