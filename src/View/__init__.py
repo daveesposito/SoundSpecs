@@ -39,7 +39,9 @@ class MainView(Frame):
         self.Mics3 = MicView(self._right)
         self.DI = DIView(self._interfaces)
         self.ReAmp = ReAmpView(self._interfaces)
-        self.Interface = Focusrite_InputView(self._interfaces)
+        self.Channel1 = Focusrite_InputView(self._interfaces)
+        self.Channel2 = Focusrite_InputView(self._interfaces)
+        self.Channel3 = Focusrite_InputView(self._interfaces)
         
         self._left.pack(side="left")
         self._middle.pack(side="left")
@@ -53,4 +55,6 @@ class MainView(Frame):
         
         self.DI.pack()
         self.ReAmp.pack()
-        self.Interface.pack()
+        self.Channel1.pack()
+        self.Channel2.pack()
+        self.Channel3.pack()
