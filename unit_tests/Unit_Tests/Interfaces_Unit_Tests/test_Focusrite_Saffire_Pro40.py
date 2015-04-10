@@ -17,20 +17,20 @@ class Test(unittest.TestCase):
         self.assertFalse(F1.PhantomPower[0].Current_State())
         self.assertFalse(F1.PhantomPower[1].Current_State())
         self.assertEqual(F1.MainLevel.Current_Position(), 0)
-        self.assertEqual(F1.MicLevels[0].Current_Position(), 0)
-        self.assertEqual(F1.MicLevels[1].Current_Position(), 0)
+        self.assertEqual(F1.PhonesLevels[0].Current_Position(), 0)
+        self.assertEqual(F1.PhonesLevels[1].Current_Position(), 0)
         
     def test_ConstructorWithMainLevel(self):
         F1 = Focusrite_Saffire_Pro40(main_level=3)
         self.assertEqual(F1.MainLevel.Current_Position(), 3)
         
     def test_ConstructorWithMic1(self):
-        F1 = Focusrite_Saffire_Pro40(mic_level_1=4)
-        self.assertEqual(F1.MicLevels[0].Current_Position(), 4)
+        F1 = Focusrite_Saffire_Pro40(phones_level_1=4)
+        self.assertEqual(F1.PhonesLevels[0].Current_Position(), 4)
         
     def test_ConstructorWithMic2(self):
-        F1 = Focusrite_Saffire_Pro40(mic_level_2=5)
-        self.assertEqual(F1.MicLevels[1].Current_Position(), 5)
+        F1 = Focusrite_Saffire_Pro40(phones_level_2=5)
+        self.assertEqual(F1.PhonesLevels[1].Current_Position(), 5)
 
     def test_ConstructedInterfaceHasSwitchesOnChannels1And2(self):
         F1 = Focusrite_Saffire_Pro40()
