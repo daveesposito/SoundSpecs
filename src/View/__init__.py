@@ -7,6 +7,7 @@ from Tkinter import Frame
 from View.AmplifierView import AmpflierView
 from View.InstrumentView import InstrumentView
 from View.PedalsView import PedalsView
+from View.MicView import MicView
 
 class MainView(Frame):
     '''
@@ -19,26 +20,20 @@ class MainView(Frame):
         Frame.__init__(self, parent)
         self.parent = parent
         self._left = Frame(self.parent)
+        self._middle = Frame(self.parent)
         self._right = Frame(self.parent)
         
         self.Instrument = InstrumentView(self._left)
         self.Pedals1 = PedalsView(self._left)
         self.Pedals2 = PedalsView(self._left)
-        self.Amp = AmpflierView(self._right)
-        
-        #self.columnconfigure(0, weight=1)
-        #self.columnconfigure(1, weight=1)
-        
-        #self.Instrument.grid(column=0, row=0)
-        #self.Pedals1.grid(column=0, row=1)
-        #self.Pedals2.grid(column=0, row=2)
-        #self.Amp.grid(column=1, row=0, rowspan=3)
+        self.Amp = AmpflierView(self._middle)
+        self.Mics1 = MicView(self._right)
+        self.Mics2 = MicView(self._right)
         
         self._left.pack(side="left")
-        self._right.pack(side="right")
+        self._middle.pack(side="left")
+        self._right.pack(side="left")
+                
         
-        self.Instrument.pack()
-        self.Pedals1.pack()
-        self.Pedals2.pack()
         
         self.Amp.pack()

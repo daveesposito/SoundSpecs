@@ -40,7 +40,7 @@ class Compressor():
         self.Tone = Knob("Tone", current_position=tone_val)
         self.Attack = Knob("Attack", current_position=attack_val)
         self.Sustain = Knob("Threshold", current_position=sustain_val)
-        self.ConnectedDevice = Connection()
+        self.ConnectedDevice = Connection("Input")
         
     def Turn_On(self):
         '''
