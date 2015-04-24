@@ -9,7 +9,6 @@ from View import MainView
 
 class Test(unittest.TestCase):
 
-
     def test_MANUAL_UI_TEST(self):
         root = Tk()
         app = MainView(root)

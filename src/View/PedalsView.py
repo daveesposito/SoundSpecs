@@ -14,9 +14,9 @@ class PedalsView(Frame):
     Provides a frame to select the Pedals and pedal parameters for the signal chain.
     '''
 
-    AVAILABLE_PEDALS = {'Compressor':Compressor(),
-                        'Gate':Gate(),
-                        '<none>':""}
+    AVAILABLE_PEDALS = {'<none>':"",
+                        'Compressor':Compressor(),
+                        'Gate':Gate()}
 
     def __init__(self, parent):
         '''
@@ -26,14 +26,14 @@ class PedalsView(Frame):
         self.parent = parent
         
         self._labelframe = LabelFrame(self.parent, text="Select Pedal")
-        self.PedalList = Listbox(self._labelframe, selectmode="single", height=len(self.AVAILABLE_PEDALS))
+        self.PedalList = Listbox(self._labelframe, selectmode="single", height = 12)
         self._controlsframe = Frame(self._labelframe, width=222, height=182)                                  
         self.Controls = list()
         self.ControlItems = dict()
         self.ControlLabels = dict()
         self.SwitchStates = dict()
         
-        for pedal in self.AVAILABLE_PEDALS.keys():
+        for pedal in sorted(self.AVAILABLE_PEDALS.keys()):
             self.PedalList.insert("end", pedal)
             
         self.PedalList.bind('<<ListboxSelect>>', self.loadControls)
@@ -44,14 +44,16 @@ class PedalsView(Frame):
         self._labelframe.pack(expand=True, fill="both")
         self.PedalList.grid(column=0, row=0, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
         self._controlsframe.grid(column=1, row=0, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
-        
+                
     def loadControls(self, evt):
         selectedPedal = self.PedalList.selection_get()
         if selectedPedal != ():
             if selectedPedal == '<none>':
                 self._clearPedals()
+                self._labelframe.config(text = "Select Pedal")
             else:
                 self._clearPedals()
+                self._labelframe.config(text = selectedPedal)
                 self._listControlsForSelectedPedal(selectedPedal)
                 self._createControlsForSelectedPedal()
                 self._placeControls()

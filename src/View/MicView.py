@@ -22,8 +22,8 @@ class MicView(Frame):
         self.parent = parent
         
         self._labelframe = LabelFrame(self.parent, text="Select Mic")
-        self.MicList = Listbox(self._labelframe, selectmode="single", height=len(self.AVAILABLE_MICS))
-        self._controlsframe = Frame(self._labelframe, width=173, height=125)
+        self.MicList = Listbox(self._labelframe, selectmode="single", height=14)
+        self._controlsframe = Frame(self._labelframe, width=200, height=125)
         self._placedframe = Frame(self._controlsframe)
         self._padframe = Frame(self._controlsframe)
         self._highpassframe = Frame(self._controlsframe)
@@ -37,11 +37,11 @@ class MicView(Frame):
         self._padlabel = Label(self._controlsframe, text="Pad", anchor="w")
         self._highpasslabel = Label(self._controlsframe, text="Highpass", anchor="w")
         
-        self.Clock = Spinbox(self._controlsframe, from_=1, to_=12, width=10)
-        self.Radius = Spinbox(self._controlsframe, from_=0, to_=15, width=10)
-        self.XAngle = Spinbox(self._controlsframe, from_=-90, to_=90, width=10)
-        self.YAngle = Spinbox(self._controlsframe, from_=-90, to_=90, width=10)
-        self.Distance = Spinbox(self._controlsframe, from_=0, to_=120, width=10)
+        self.Clock = Spinbox(self._controlsframe, from_=1, to_=12, width=12)
+        self.Radius = Spinbox(self._controlsframe, from_=0, to_=15, width=12)
+        self.XAngle = Spinbox(self._controlsframe, from_=-90, to_=90, width=12)
+        self.YAngle = Spinbox(self._controlsframe, from_=-90, to_=90, width=12)
+        self.Distance = Spinbox(self._controlsframe, from_=0, to_=120, width=12)
         self.Placed_State = IntVar()
         self.Placed_Amp = Radiobutton(self._placedframe, text="Amp", variable=self.Placed_State, value=1, command=self._updateControlsForPlacement)
         self.Placed_Room = Radiobutton(self._placedframe, text="Room", variable=self.Placed_State, value=2, command=self._updateControlsForPlacement)
@@ -58,7 +58,7 @@ class MicView(Frame):
         self.Highpass_Off.pack(side="left")
         self.Highpass_On.pack(side="left")
         
-        for mic in self.AVAILABLE_MICS:
+        for mic in sorted(self.AVAILABLE_MICS):
             self.MicList.insert("end", mic)
             
         self.MicList.bind('<<ListboxSelect>>', self.loadSwitches)
@@ -87,25 +87,33 @@ class MicView(Frame):
         self.YAngle.grid(column=1, row=4, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
         self.Distance.grid(column=1, row=5, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
         
-    def loadSwitches(self, evt):
-        selectedMic = self.MicList.selection_get()
-        if selectedMic != ():
-            if selectedMic == 'MK319':
-                self._loadControls()
-            else:
-                self._clearControls()
-    
-    def _clearControls(self):
-        self._padlabel.grid_forget()
-        self._highpasslabel.grid_forget()
-        self._padframe.grid_forget()
-        self._highpassframe.grid_forget()
-            
-    def _loadControls(self):
         self._padlabel.grid(column=0, row=6, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
         self._highpasslabel.grid(column=0, row=7, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
         self._padframe.grid(column=1, row=6, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
         self._highpassframe.grid(column=1, row=7, sticky="n"+"e"+"w"+"s", padx=2, pady=2)
+        
+    def loadSwitches(self, evt):
+        selectedMic = self.MicList.selection_get()
+        if selectedMic != ():
+            self._labelframe.config(text = selectedMic)
+            if selectedMic == 'MK319':
+                self._loadControls()
+            elif selectedMic == '<none>':
+                self._labelframe.config(text = "Select Mic")
+            else:
+                self._clearControls()
+    
+    def _clearControls(self):
+        self.Highpass_On.config(state="disabled")
+        self.Highpass_Off.config(state="disabled")
+        self.Pad_10dB.config(state="disabled")
+        self.Pad_None.config(state="disabled")
+            
+    def _loadControls(self):
+        self.Highpass_On.config(state="normal")
+        self.Highpass_Off.config(state="normal")
+        self.Pad_10dB.config(state="normal")
+        self.Pad_None.config(state="normal")        
         
     def _updateControlsForPlacement(self):
         if self.Placed_State.get() == 1:

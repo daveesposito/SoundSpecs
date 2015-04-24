@@ -28,7 +28,7 @@ class InstrumentView(Frame):
         self.parent = parent
         
         self._labelframe = LabelFrame(self.parent, text="Select Instrument")
-        self.InstrumentsList = Listbox(self._labelframe, selectmode="single", height=len(self.AVAILABLE_INSTRUMENTS))
+        self.InstrumentsList = Listbox(self._labelframe, selectmode="single", height=8)
         self._controlsframe = Frame(self._labelframe, width=173, height=125)
         self.Controls = list()
         self.ControlItems = dict()
@@ -50,8 +50,10 @@ class InstrumentView(Frame):
         selectedInstrument = self.InstrumentsList.selection_get()
         if selectedInstrument != ():
             if selectedInstrument == '<none>':
+                self._labelframe.config(text="Select Instrument")
                 self._clearInstruments()
             else:
+                self._labelframe.config(text=selectedInstrument)
                 self._clearInstruments()
                 self.Controls = self.AVAILABLE_INSTRUMENTS[selectedInstrument].__dict__.values()
                 self._createControlsForSelectedInstrument()
