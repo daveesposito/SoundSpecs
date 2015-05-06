@@ -4,7 +4,7 @@ Created on Apr 9, 2015
 @author: desposito
 '''
 from Tkinter import Frame, LabelFrame, Spinbox, Radiobutton, IntVar, Label
-from model.Amplifier.DriveChannel import DriveChannel
+from model.amplifier import drivechannel.DriveChannel
 
 class DriveChannelView(Frame):
     '''
@@ -19,7 +19,7 @@ class DriveChannelView(Frame):
         Frame.__init__(self, parent)
         self.parent = parent
         
-        model = DriveChannel()
+        model = drivechannel()
         
         self._labelframe = LabelFrame(self.parent, text="Drive Channel")
         self._gainlabel = Label(self._labelframe, text="Gain", anchor="w")

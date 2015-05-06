@@ -4,7 +4,7 @@ Created on Apr 9, 2015
 @author: desposito
 '''
 from Tkinter import Frame, LabelFrame, Spinbox, Radiobutton, IntVar, Label
-from model.Amplifier.MasterChannel import MasterChannel
+from model.amplifier import masterchannel.MasterChannel
 
 class MasterChannelView(Frame):
     '''
@@ -19,7 +19,7 @@ class MasterChannelView(Frame):
         Frame.__init__(self, parent)
         self.parent = parent
         
-        model = MasterChannel()
+        model = masterchannel()
         
         self._labelframe = LabelFrame(self.parent, text="Master Channel")
         self._volumelabel = Label(self._labelframe, text="Volume", anchor="w")

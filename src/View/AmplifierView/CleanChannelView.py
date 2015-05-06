@@ -4,7 +4,7 @@ Created on Apr 9, 2015
 @author: desposito
 '''
 from Tkinter import Frame, LabelFrame, Spinbox, Radiobutton, IntVar, Label
-from model.Amplifier.CleanChannel import CleanChannel
+from model.amplifier import cleanchannel.CleanChannel
 
 class CleanChannelView(Frame):
     '''
@@ -19,7 +19,7 @@ class CleanChannelView(Frame):
         Frame.__init__(self, parent)
         self.parent = parent
         
-        model = CleanChannel()
+        model = cleanchannel()
         
         self._labelframe = LabelFrame(self.parent, text="Clean Channel")
         self._gainlabel = Label(self._labelframe, text="Gain", anchor="w")
