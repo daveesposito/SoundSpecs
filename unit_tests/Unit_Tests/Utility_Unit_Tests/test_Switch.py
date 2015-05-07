@@ -6,7 +6,7 @@ Created on Mar 13, 2015
 
 import unittest
 
-from model.Utilities.Controls import Switch
+from model.utilities.controls import Switch
 
 
 class Test(unittest.TestCase):

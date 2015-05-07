@@ -4,7 +4,7 @@ Created on Mar 18, 2015
 @author: desposito
 '''
 from model.Mics.Mic import Mic
-from model.Utilities.Controls import Switch
+from model.utilities.controls import Switch
 
 class MK319(Mic):
     '''

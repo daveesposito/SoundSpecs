@@ -3,8 +3,8 @@ Created on Mar 18, 2015
 
 @author: desposito
 '''
-from model.Utilities.Controls import Switch, Knob
-from model.Utilities.Connection import Connection
+from model.utilities.controls import Switch, Knob
+from model.utilities import connection.Connection
 
 class Focusrite_Saffire_Pro40():
     '''
@@ -69,7 +69,7 @@ class InputChannel():
         Constructor
         '''
         self.Level = Knob("Level", current_position=level)
-        self.ConnectedDevice = Connection()
+        self.ConnectedDevice = connection()
         self.InstrumentSwitch = None
         self.PadSwitch = None
         

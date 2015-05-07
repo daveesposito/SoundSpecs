@@ -7,7 +7,7 @@ Created on Mar 13, 2015
 from cleanchannel import CleanChannel
 from drivechannel import DriveChannel
 from masterchannel import MasterChannel
-from model.Utilities.Connection import Connection
+from model.utilities.connection import Connection
 
 
 class Amplifier(object):

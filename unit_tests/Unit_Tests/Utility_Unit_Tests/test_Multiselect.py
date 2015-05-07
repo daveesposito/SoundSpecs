@@ -6,7 +6,7 @@ Created on Mar 17, 2015
 
 import unittest
 
-from model.Utilities.Controls import Multiselect
+from model.utilities.controls import Multiselect
 
 
 class Test(unittest.TestCase):

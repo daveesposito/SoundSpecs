@@ -5,9 +5,9 @@ Created on Apr 8, 2015
 '''
 from Tkinter import Frame, Listbox, LabelFrame, Spinbox, Label, Radiobutton,\
     IntVar, Entry
-from model.Pedals.Compressor import Compressor
-from model.Pedals.Gate import Gate
-from model.Utilities.Controls import Switch, Knob
+from model.pedals import compressor.Compressor
+from model.pedals.Gate import Gate
+from model.utilities.controls import Switch, Knob
 
 class PedalsView(Frame):
     '''
@@ -15,7 +15,7 @@ class PedalsView(Frame):
     '''
 
     AVAILABLE_PEDALS = {'<none>':"",
-                        'Compressor':Compressor(),
+                        'compressor':compressor(),
                         'Gate':Gate()}
 
     def __init__(self, parent):

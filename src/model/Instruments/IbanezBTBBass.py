@@ -3,7 +3,7 @@ Created on Mar 17, 2015
 
 @author: desposito
 '''
-from model.Utilities.Controls import Knob
+from model.utilities.controls import Knob
 
 class IbanezBTBBass():
     '''

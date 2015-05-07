@@ -3,8 +3,8 @@ Created on Mar 19, 2015
 
 @author: desposito
 '''
-from model.Utilities.Controls import Knob
-from model.Utilities.Connection import Connection
+from model.utilities.controls import Knob
+from model.utilities import connection.Connection
 
 class IMP2():
     '''
@@ -16,4 +16,4 @@ class IMP2():
         Constructor
         '''
         self.Level = Knob("Level", current_position=level)
-        self.ConnectedDevice = Connection()
+        self.ConnectedDevice = connection()

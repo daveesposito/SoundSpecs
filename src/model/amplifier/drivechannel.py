@@ -4,7 +4,7 @@ Created on Mar 12, 2015
 @author: desposito
 '''
 
-from model.Utilities.Controls import Knob, Switch
+from model.utilities.controls import Knob, Switch
 
 
 class DriveChannel():

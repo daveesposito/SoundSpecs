@@ -4,28 +4,30 @@ Created on Mar 16, 2015
 @author: desposito
 '''
 import unittest
-from model.Pedals.Gate import Gate
-from model.Pedals.Compressor import Compressor
-from model.Pedals.Gate import Send
+from model.pedals.gate import Gate, Send
+from model.pedals.compressor import Compressor
+
 
 class Test(unittest.TestCase):
 
+
     def test_ValidateDefaultConstructor(self):
-        G1 = Gate()
-        self.assertEqual(G1.Get_Current_Active_State(), "Off")
-        self.assertEqual(G1.Get_Current_Mode(), "Gate")
-        self.assertEqual(G1.Threshold.Current_Position(), 0.0)
-        self.assertEqual(G1.Decay.Current_Position(), 0.0)
-        self.assertIsNone(G1.ConnectedDevice.Device)
-        self.assertIsNone(G1.Return.Device)
+        
+        gate = Gate()
+        self.assertEqual(gate.get_current_active_state(), "Off")
+        self.assertEqual(gate.get_current_mode(), "Gate")
+        self.assertEqual(gate.threshold.current_position, 0.0)
+        self.assertEqual(gate.decay.current_position, 0.0)
+        self.assertIsNone(gate.connected_device.device)
+        self.assertIsNone(gate.return_.device)
         
     def test_ConstructWithCustomThreshold(self):
-        G1 = Gate(threshold=3.4)
-        self.assertEqual(G1.Threshold.Current_Position(), 3.4)
+        gate = Gate(threshold=3.4)
+        self.assertEqual(gate.threshold.current_position, 3.4)
 
     def test_ConstructWithCustomDecay(self):
-        G1 = Gate(decay=5.6)
-        self.assertEqual(G1.Decay.Current_Position(), 5.6)
+        gate = Gate(decay=5.6)
+        self.assertEqual(gate.decay.current_position, 5.6)
 
     def test_ConstructWithLowThresholdRaisesException(self):
         self.assertRaises(ValueError, Gate, threshold=-1)
@@ -46,37 +48,38 @@ class Test(unittest.TestCase):
         self.assertRaises(TypeError, Gate, decay="threve")
         
     def test_Turn_Off_Deactivates_Gate(self):
-        G1 = Gate()
-        G1.Turn_Off()
-        self.assertEqual(G1.Is_Active(), False)
-        self.assertEqual(G1.Get_Current_Active_State(), "Off")
+        gate = Gate()
+        gate.turn_off()
+        self.assertEqual(gate.is_active(), False)
+        self.assertEqual(gate.get_current_active_state(), "Off")
         
     def test_Turn_On_Activates_Gate(self):
-        G1 = Gate()
-        G1.Turn_Off()
-        self.assertEqual(G1.Is_Active(), False)
-        self.assertEqual(G1.Get_Current_Active_State(), "Off")
-        G1.Turn_On()
-        self.assertEqual(G1.Is_Active(), True)
-        self.assertEqual(G1.Get_Current_Active_State(), "On")
+        gate = Gate()
+        gate.turn_off()
+        self.assertEqual(gate.is_active(), False)
+        self.assertEqual(gate.get_current_active_state(), "Off")
+        gate.turn_on()
+        self.assertEqual(gate.is_active(), True)
+        self.assertEqual(gate.get_current_active_state(), "On")
     
     def test_Set_Mode_To_Mute(self):
-        G1 = Gate()
-        G1.Set_Mode_To_Mute()
-        self.assertEqual(G1.Get_Current_Mode(), "Mute")
+        gate = Gate()
+        gate.set_mode_to_mute()
+        self.assertEqual(gate.get_current_mode(), "Mute")
         
     def test_Set_Mode_To_Gate(self):
-        G1 = Gate()
-        G1.Set_Mode_To_Mute()
-        self.assertEqual(G1.Get_Current_Mode(), "Mute")
-        G1.Set_Mode_To_Gate()
-        self.assertEqual(G1.Get_Current_Mode(), "Gate")
+        gate = Gate()
+        gate.set_mode_to_mute()
+        self.assertEqual(gate.get_current_mode(), "Mute")
+        gate.set_mode_to_gate()
+        self.assertEqual(gate.get_current_mode(), "Gate")
         
     def test_AssignOtherInputToSend(self):
-        C1 = Compressor()
-        G1 = Gate()
-        C1.ConnectedDevice = G1.Send
-        self.assertIsInstance(C1.ConnectedDevice, Send)
+        
+        comp = Compressor()
+        gate = Gate()
+        comp.connected_device = gate.send
+        self.assertIsInstance(comp.connected_device, Send)
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testValidateDefaultConstructor']

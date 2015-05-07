@@ -3,8 +3,8 @@ Created on Mar 27, 2015
 
 @author: Dave
 '''
-from model.Utilities.Controls import Knob, Switch
-from model.Utilities.Connection import Connection
+from model.utilities.controls import Knob, Switch
+from model.utilities import connection.Connection
 
 class ProRMP():
     '''
@@ -17,4 +17,4 @@ class ProRMP():
         '''
         self.Level = Knob("Level", current_position=level)
         self.Lift = Switch("Lift", current_state=lift)
-        self.ConnectedDevice = Connection()
+        self.ConnectedDevice = connection()

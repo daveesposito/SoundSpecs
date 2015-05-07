@@ -6,7 +6,7 @@ Created on Mar 13, 2015
 
 import unittest
 
-from model.Utilities.Controls import Knob
+from model.utilities.controls import Knob
 
 
 class Test(unittest.TestCase):

@@ -8,7 +8,7 @@ from model.Instruments.GibsonLesPaul import GibsonLesPaul
 from model.Instruments.GibsonSG import GibsonSG
 from model.Instruments.IbanezBTBBass import IbanezBTBBass
 from model.Instruments.SuzukiM import SuzukiM
-from model.Utilities.Controls import Multiselect
+from model.utilities.controls import Multiselect
 
 class InstrumentView(Frame):
     '''
