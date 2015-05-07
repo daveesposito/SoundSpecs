@@ -13,8 +13,7 @@ class MasterChannel():
 
 
     def __init__(self, volume=0.0, reverb=0.0, send_level=0.0):
-        '''
-        Constructor
+        '''Constructor
         '''
 
         try:
@@ -42,17 +41,17 @@ class MasterChannel():
         '''Sets the amp to use the drive channel.
         '''
         
-        self.channel_select.Turn_Off()
+        self.channel_select.turn_off()
         
     def select_clean(self):
         '''Sets the amp to use the clean channel.
         '''
         
-        self.channel_select.Turn_On()
+        self.channel_select.turn_on()
         
     def current_type(self):
         '''Determines which channel the amp is using.
         '''
         
-        return self.channel_select.Current_State_Name()
+        return self.channel_select.state_name()
     

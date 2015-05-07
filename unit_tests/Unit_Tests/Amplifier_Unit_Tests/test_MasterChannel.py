@@ -15,31 +15,31 @@ class Test(unittest.TestCase):
     def testDefaultConstructorValidation(self):
         
         master = MasterChannel()
-        self.assertEqual(master.volume.Current_Position(), 0.0)
-        self.assertEqual(master.reverb.Current_Position(), 0.0)
-        self.assertEqual(master.send_level.Current_Position(), 0.0)
+        self.assertEqual(master.volume.current_position, 0.0)
+        self.assertEqual(master.reverb.current_position, 0.0)
+        self.assertEqual(master.send_level.current_position, 0.0)
 
     def testConstructorWithVolumeSetting(self):
         
         master = MasterChannel(volume=4)
-        self.assertEqual(master.volume.Current_Position(), 4)
+        self.assertEqual(master.volume.current_position, 4)
 
     def testConstructorWithReverbSetting(self):
         
         master = MasterChannel(reverb=5.1)
-        self.assertEqual(master.reverb.Current_Position(), 5.1)
+        self.assertEqual(master.reverb.current_position, 5.1)
     
     def testConstructorWithSendLevelSetting(self):
         
         master = MasterChannel(send_level=9.9)
-        self.assertEqual(master.send_level.Current_Position(), 9.9)
+        self.assertEqual(master.send_level.current_position, 9.9)
         
     def testConstructorWithAllSettings(self):
         
         master = MasterChannel(3, 7, 9)
-        self.assertEqual(master.volume.Current_Position(), 3.0)
-        self.assertEqual(master.reverb.Current_Position(), 7.0)
-        self.assertEqual(master.send_level.Current_Position(), 9.0)
+        self.assertEqual(master.volume.current_position, 3.0)
+        self.assertEqual(master.reverb.current_position, 7.0)
+        self.assertEqual(master.send_level.current_position, 9.0)
     
     def testReadDefaultChannelSelection(self):
         

@@ -15,38 +15,38 @@ class Test(unittest.TestCase):
     def testDefaultConstructorValidation(self):
         
         clean = CleanChannel()
-        self.assertEqual(clean.gain.Current_Position(), 0.0)
-        self.assertEqual(clean.bass.Current_Position(), 0.0)
-        self.assertEqual(clean.mid.Current_Position(), 0.0)
-        self.assertEqual(clean.treble.Current_Position(), 0.0)
+        self.assertEqual(clean.gain.current_position, 0.0)
+        self.assertEqual(clean.bass.current_position, 0.0)
+        self.assertEqual(clean.mid.current_position, 0.0)
+        self.assertEqual(clean.treble.current_position, 0.0)
 
     def testConstructorWithGainSetting(self):
         
         clean = CleanChannel(gain=4)
-        self.assertEqual(clean.gain.Current_Position(), 4)
+        self.assertEqual(clean.gain.current_position, 4)
 
     def testConstructorWithBassSetting(self):
         
         clean = CleanChannel(bass=5.1)
-        self.assertEqual(clean.bass.Current_Position(), 5.1)
+        self.assertEqual(clean.bass.current_position, 5.1)
         
     def testConstructorWithMidSetting(self):
         
         clean = CleanChannel(mid=4.7)
-        self.assertEqual(clean.mid.Current_Position(), 4.7)
+        self.assertEqual(clean.mid.current_position, 4.7)
     
     def testConstructorWithTrebleSetting(self):
         
         clean = CleanChannel(treble=9.9)
-        self.assertEqual(clean.treble.Current_Position(), 9.9)
+        self.assertEqual(clean.treble.current_position, 9.9)
         
     def testConstructorWithAllSettings(self):
         
         clean = CleanChannel(3, 7, 8, 9)
-        self.assertEqual(clean.gain.Current_Position(), 3.0)
-        self.assertEqual(clean.bass.Current_Position(), 7.0)
-        self.assertEqual(clean.mid.Current_Position(), 8.0)
-        self.assertEqual(clean.treble.Current_Position(), 9.0)
+        self.assertEqual(clean.gain.current_position, 3.0)
+        self.assertEqual(clean.bass.current_position, 7.0)
+        self.assertEqual(clean.mid.current_position, 8.0)
+        self.assertEqual(clean.treble.current_position, 9.0)
     
     def testReadDefaultCleanType(self):
         

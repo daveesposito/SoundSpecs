@@ -4,157 +4,147 @@ Created on Mar 13, 2015
 @author: desposito
 '''
 
+
 class Knob():
-    '''
-    Generic knob object. Tracks name, min, max and current position.
+    ''' Generic knob object. Tracks name, min, max and current position.
     '''
 
-    def __init__(self, name, min_value=0.0, max_value=10.0, current_position=0):
+
+    def __init__(self, name, min_value=0.0, max_value=10.0, 
+                 current_position=0):
+        '''Constructor
         '''
-        Constructor
-        '''
-        self.Name = name
-        self._min_value = min_value
-        self._max_value = max_value
-        self._validate_provided_position(current_position)
-        self._current_position = current_position
+
+        self.name = name
+        self.min_value = min_value
+        self.max_value = max_value
         
-    def Turn_To(self, new_position):
-        '''
-        Allows the knob to be set to a particular position.
-        '''
-        self._validate_provided_position(new_position)
-        self._current_position = new_position
+        self._validate_position(current_position)
+        self.current_position = current_position
         
-    def Current_Position(self):
+    def turn_to(self, new_position):
+        '''Allows the knob to be set to a particular position.
         '''
-        Returns the current position of the knob.
-        '''
-        return self._current_position
         
-    def _validate_provided_position(self, position):
+        self._validate_position(new_position)
+        self.current_position = new_position
+        
+    def _validate_position(self, position):
+        '''Ensures that the provided knob position is a valid number between 
+           the min and max value specified for the knob.
         '''
-        Ensures that the provided knob position is a valid number between the min and max value specified for the knob.
-        '''
+        
         try:
-            position_value = float(position)
+            position_val = float(position)
         except:
-            raise TypeError("A non-numeric value was provided as the knob position. Value provided: {0}".format(position))
+            raise TypeError("Non-numeric value provided: {0}".format(position))
         
-        if position_value < self._min_value or position_value > self._max_value:
-            raise ValueError("The provided knob position is outside of the allowable range for this knob. Provided: {0} / Min: {1} / Max: {2}".format(position, self._min_value, self._max_value))
+        if position_val < self.min_value or position_val > self.max_value:
+            raise ValueError("Bad value: {0} / Min: {1} / Max: {2}"\
+                             .format(position, self.min_value, self.max_value))
+
         
-class Switch():
-    '''
-    Generic switch object.  Tracks name, on_value, off_value and current_state.
+class Switch():    
+    '''Generic switch object.  Tracks name, on_val, off_val and state.
     '''
     
-    def __init__(self, name, true_value="On", false_value="Off", current_state=True):
+    
+    def __init__(self, name, true_val="On", false_val="Off", state=True):
+        '''Constructor
         '''
-        Constructor
-        '''
-        self.Name = name
-        self._true_value = true_value
-        self._false_value = false_value
-        self._current_state = current_state
         
-    def Turn_On(self):
-        '''
-        Set the switch to the ON position.
-        '''
-        self._current_state = True
+        self.name = name
+        self._true_value = true_val
+        self._false_value = false_val
+        self.state = state
         
-    def Turn_Off(self):
+    def turn_on(self):
+        '''Set the switch to the ON position.
         '''
-        Set the switch to the OFF position.
-        '''
-        self._current_state = False
         
-    def Toggle(self):
+        self.state = True
+        
+    def turn_off(self):
+        '''Set the switch to the OFF position.
         '''
-        Set the switch to the state opposite of where it is.
+        
+        self.state = False
+        
+    def toggle(self):
+        '''Set the switch to the state opposite of where it is.
         '''
-        if self._current_state:
-            self._current_state = False
+        
+        if self.state:
+            self.state = False
         else:
-            self._current_state = True
+            self.state = True
     
-    def Current_State(self):
+    def state_name(self):
+        '''Tell the name of the state based on whether the switch is pressed 
+           or not.
         '''
-        Tell whether the switch is pressed or not.
-        '''
-        return self._current_state
-    
-    def Current_State_Name(self):
-        '''
-        Tell the name of the state based on whether the switch is pressed or not.
-        '''
-        if self._current_state:
+        
+        if self.state:
             return self._true_value
         else:
             return self._false_value
         
+        
 class Multiselect():
-    '''
-    Multiselect switch useful for things like guitar pickup selectors.
+    '''Multiselect switch useful for things like guitar pickup selectors.
     '''
     
-    def __init__(self, name, current_position, *selections):
+    
+    def __init__(self, name, position, *selections):
+        '''Constructor
         '''
-        Constructor
-        '''
-        self.Name = name
-        self.current_position = ""
+        
+        self.name = name
+        self.position = ""
+        
         self.selections = list()
         for selection in selections:
             try:
                 selection_string = str(selection)
             except:
-                raise TypeError("Invalid selection provide. Must be able to be represented as a string.")
+                raise TypeError("selection must be representable as a string.")
             self.selections.append(selection_string)
-        self.Set_Selection(current_position)
         
-    def Set_Selection(self, new_selection):
-        '''
-        Set a new position for the switch.
-        '''
-        if not new_selection in self.selections:
-            raise ValueError("The provide position is not valid for this switch. Provide value: " + str(new_selection))
+        self.set_selection(position)
         
-        self.current_position = new_selection
+    def set_selection(self, new_selection):
+        '''Set a new position for the switch.
+        '''
         
-    def Add_Selection(self, new_selection):
+        if new_selection not in self.selections:
+            raise ValueError("Provided position not valid: {0}"\
+                             .format(str(new_selection)))
+        
+        self.position = new_selection
+        
+    def add_selection(self, new_selection):
+        '''Adds a value to the valid list of selections.
         '''
-        Adds a value to the valid list of selections.
-        '''
+        
         if new_selection in self.selections:
-            raise ValueError("The provided switch selection already exists. Provided value: " + str(new_selection))
+            raise ValueError("selection already exists: {0}"\
+                             .format(str(new_selection)))
         
         self.selections.append(new_selection)
         
-    def Remove_Selection(self, selection_to_remove):
+    def remove_selection(self, selection_to_remove):
+        '''Remove a selection from the list of selections.
         '''
-        Remove a selection from the list of selections.
-        '''
-        if not selection_to_remove in self.selections:
-            raise ValueError("The provided selection does not exist. Provided value: " + str(selection_to_remove))
+        
+        if selection_to_remove not in self.selections:
+            raise ValueError("Provided selection doesn't exist: {0}"\
+                             .format((selection_to_remove)))
         
         self.selections.remove(selection_to_remove)
+    
+    def number_of_options(self):
+        '''Returns the number of available options.
+        '''
         
-    def Current_Position(self):
-        '''
-        Returns the current switch position.
-        '''
-        return self.current_position
-    
-    def List_Options(self):
-        '''
-        Returns a list of the current available options.
-        '''
-        return self.selections
-    
-    def Number_of_Options(self):
-        '''
-        Returns the number of available options.
-        '''
         return len(self.selections)
+    

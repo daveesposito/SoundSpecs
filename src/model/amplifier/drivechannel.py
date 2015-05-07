@@ -14,8 +14,7 @@ class DriveChannel():
 
     def __init__(self, gain=0.0, bass=0.0, mid=0.0, treble=0.0, 
                  contour=0.0, volume=0.0):
-        '''
-        Constructor
+        '''Constructor
         '''
         
         try:
@@ -60,17 +59,17 @@ class DriveChannel():
         '''Activate Heavy Distortion.
         '''
         
-        self.drive_type.Turn_On()
+        self.drive_type.turn_on()
         
     def select_OD1(self):
         '''Activate Crunchy Distortion.
         '''
         
-        self.drive_type.Turn_Off()
+        self.drive_type.turn_off()
         
     def current_type(self):
         '''Determines which circuit the drive channel is using.
         '''
         
-        return self.drive_type.Current_State_Name()
+        return self.drive_type.state_name()
     

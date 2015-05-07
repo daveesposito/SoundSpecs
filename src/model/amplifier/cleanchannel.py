@@ -13,8 +13,7 @@ class CleanChannel():
     
     
     def __init__(self, gain=0.0, bass=0.0, mid=0.0, treble=0.0):
-        '''
-        Constructor
+        '''Constructor
         '''
     
         try:
@@ -47,16 +46,16 @@ class CleanChannel():
         '''Sets the channel to use the crunch circuit.
         '''
         
-        self.clean_type.Turn_On()
+        self.clean_type.turn_on()
         
     def select_clean(self):
         '''Sets the channel to use the clean circuit.
         '''
         
-        self.clean_type.Turn_Off()
+        self.clean_type.turn_off()
         
     def current_type(self):
         '''Determines which circuit the clean channel is using.
         '''
         
-        return self.clean_type.Current_State_Name()
+        return self.clean_type.state_name()

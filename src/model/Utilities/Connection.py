@@ -4,15 +4,15 @@ Created on Apr 9, 2015
 @author: desposito
 '''
 
+
 class Connection():
-    '''
-    classdocs
+    '''Provides an object for setting a connection in a device.
     '''
 
 
     def __init__(self, name="No Connection", device=None):
+        '''Constructor
         '''
-        Constructor
-        '''
-        self.Name = name
-        self.Device = device
+        
+        self.name = name
+        self.device = device

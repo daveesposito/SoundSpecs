@@ -34,13 +34,13 @@ class Amplifier(object):
         '''
         
         if gain is not None:
-            self.clean.gain.Turn_To(gain)
+            self.clean.gain.turn_to(gain)
         if bass is not None:
-            self.clean.bass.Turn_To(bass)
+            self.clean.bass.turn_to(bass)
         if mid is not None:
-            self.clean.mid.Turn_To(mid)
+            self.clean.mid.turn_to(mid)
         if treble is not None:
-            self.clean.treble.Turn_To(treble)
+            self.clean.treble.turn_to(treble)
         
     def set_drive_channel(self, gain=None, bass=None, mid=None, 
                           treble=None, contour=None, volume=None):
@@ -49,17 +49,17 @@ class Amplifier(object):
         '''
         
         if gain is not None:
-            self.drive.gain.Turn_To(gain)
+            self.drive.gain.turn_to(gain)
         if bass is not None:
-            self.drive.bass.Turn_To(bass)
+            self.drive.bass.turn_to(bass)
         if mid is not None:
-            self.drive.mid.Turn_To(mid)
+            self.drive.mid.turn_to(mid)
         if treble is not None:
-            self.drive.treble.Turn_To(treble)
+            self.drive.treble.turn_to(treble)
         if contour is not None:
-            self.drive.contour.Turn_To(contour)
+            self.drive.contour.turn_to(contour)
         if volume is not None:
-            self.drive.volume.Turn_To(volume)
+            self.drive.volume.turn_to(volume)
             
     def set_master_channel(self, volume=None, reverb=None, send_level=None):
         '''Allows setting of any of the master channel settings. These can also
@@ -67,8 +67,8 @@ class Amplifier(object):
         '''
         
         if volume is not None:
-            self.master.volume.Turn_To(volume)
+            self.master.volume.turn_to(volume)
         if reverb is not None:
-            self.master.reverb.Turn_To(reverb)
+            self.master.reverb.turn_to(reverb)
         if send_level is not None:
-            self.master.send_level.Turn_To(send_level)
+            self.master.send_level.turn_to(send_level)
