@@ -4,17 +4,17 @@ Created on Apr 8, 2015
 @author: desposito
 '''
 from Tkinter import Frame, Listbox, LabelFrame, Spinbox, Label
-from model.Instruments.GibsonLesPaul import GibsonLesPaul
-from model.Instruments.GibsonSG import GibsonSG
-from model.Instruments.IbanezBTBBass import IbanezBTBBass
-from model.Instruments.SuzukiM import SuzukiM
+from model.instruments import gibson_les_paul.GibsonLesPaul
+from model.instruments.GibsonSG import GibsonSG
+from model.instruments.IbanezBTBBass import IbanezBTBBass
+from model.instruments.SuzukiM import SuzukiM
 from model.utilities.controls import Multiselect
 
 class InstrumentView(Frame):
     '''
     Provides a frame to select the instrument and instrument parameters for the signal chain.
     '''
-    AVAILABLE_INSTRUMENTS = {'Gibson Les Paul':GibsonLesPaul(),
+    AVAILABLE_INSTRUMENTS = {'Gibson Les Paul':gibson_les_paul(),
                              'Gibson SG':GibsonSG(),
                              'Suzuki M':SuzukiM(),
                              'Ibanez BTB Bass':IbanezBTBBass(),
