@@ -3,361 +3,365 @@ Created on Mar 18, 2015
 
 @author: desposito
 '''
+
 import unittest
-from model.Mics.Mic import Mic
+
+from model.mics.mic import Mic
+
 
 class Test(unittest.TestCase):
 
     def test_ValidateDefaultConstructor(self):
-        M1 = Mic("SM57A")
-        self.assertEqual(M1.Name, "SM57A")
-        self.assertIn("SM57A", M1.names)
-        self.assertIsNone(M1.Clock)
-        self.assertIsNone(M1.Radius)
-        self.assertIsNone(M1.XAngle)
-        self.assertIsNone(M1.YAngle)
-        self.assertIsNone(M1.Distance)
-        self.assertIsNone(M1.Placed)
+        
+        mic = Mic("SM57A")
+        self.assertEqual(mic.name, "SM57A")
+        self.assertIn("SM57A", mic.names)
+        self.assertIsNone(mic.clock)
+        self.assertIsNone(mic.radius)
+        self.assertIsNone(mic.x_angle)
+        self.assertIsNone(mic.y_angle)
+        self.assertIsNone(mic.distance)
+        self.assertIsNone(mic.placed)
         
     def test_MultipleObjectsTrackSameListOfNames(self):
-        M1 = Mic("SM57A")
+        mic = Mic("SM57A")
         M2 = Mic("SM57B")
-        self.assertEqual(M1.names, M2.names)
+        self.assertEqual(mic.names, M2.names)
         
     def test_CannotUseDuplicateNames(self):
-        M1 = Mic("SM57A")
-        self.assertEqual(M1.Name, "SM57A")
+        mic = Mic("SM57A")
+        self.assertEqual(mic.name, "SM57A")
         self.assertRaises(ValueError, Mic, "SM57A")
 
     def test_SetAttributeReturnsValueAfterPassingValidations(self):
-        M1 = Mic("SM57A")
-        value = M1._Set_Attribute(3.14, 0, 5)
+        mic = Mic("SM57A")
+        value = mic._set_attribute(3.14, 0, 5)
         self.assertEqual(value, 3.14)
         
     def test_SetAttributePassesWhenSuppliedAnInteger(self):
-        M1 = Mic("SM57A")
-        value = M1._Set_Attribute(3, 0, 5)
+        mic = Mic("SM57A")
+        value = mic._set_attribute(3, 0, 5)
         self.assertEqual(value, 3)
         
     def test_SetAttributeWithNonNumericRaisesException(self):
-        M1 = Mic("SM57A")
-        self.assertRaises(TypeError, M1._Set_Attribute, "dog", 0, 5)
+        mic = Mic("SM57A")
+        self.assertRaises(TypeError, mic._set_attribute, "dog", 0, 5)
         
     def test_SetAttributeWithLowLimitErrorRaisesException(self):
-        M1 = Mic("SM57A")
-        self.assertRaises(ValueError, M1._Set_Attribute, -2, 0, 5)
+        mic = Mic("SM57A")
+        self.assertRaises(ValueError, mic._set_attribute, -2, 0, 5)
         
     def test_SetAttributeWithHighLimitErrorRaisesException(self):
-        M1 = Mic("SM57A")
-        self.assertRaises(ValueError, M1._Set_Attribute, 10, 0, 5)
+        mic = Mic("SM57A")
+        self.assertRaises(ValueError, mic._set_attribute, 10, 0, 5)
         
     def test_SetAttributeAllowsNegativeNumbers(self):
-        M1 = Mic("SM57A")
-        value = M1._Set_Attribute(-5, -10, -1)
+        mic = Mic("SM57A")
+        value = mic._set_attribute(-5, -10, -1)
         self.assertEqual(value, -5)
         
-    def test_SetClockUpdatesClockAttribute(self):
-        M1 = Mic("SM57A")
-        M1._Set_Clock(3)
-        self.assertEqual(M1.Clock, 3)
+    def test_SetclockUpdatesclockAttribute(self):
+        mic = Mic("SM57A")
+        mic._set_clock(3)
+        self.assertEqual(mic.clock, 3)
     
-    def test_MinimumClockIs1(self):
-        M1 = Mic("SM57A")
-        M1._Set_Clock(1)
-        self.assertEqual(M1.Clock, 1)
-        self.assertRaises(ValueError, M1._Set_Clock, 0)
+    def test_MinimumclockIs1(self):
+        mic = Mic("SM57A")
+        mic._set_clock(1)
+        self.assertEqual(mic.clock, 1)
+        self.assertRaises(ValueError, mic._set_clock, 0)
         
-    def test_MaximumClockIs12(self):
-        M1 = Mic("SM57A")
-        M1._Set_Clock(12)
-        self.assertEqual(M1.Clock, 12)
-        self.assertRaises(ValueError, M1._Set_Clock, 13)
+    def test_MaximumclockIs12(self):
+        mic = Mic("SM57A")
+        mic._set_clock(12)
+        self.assertEqual(mic.clock, 12)
+        self.assertRaises(ValueError, mic._set_clock, 13)
         
-    def test_SetRadiusUpdatesRadiusAttribute(self):
-        M1 = Mic("SM57A")
-        M1._Set_Radius(5)
-        self.assertEqual(M1.Radius, 5)
+    def test_SetradiusUpdatesradiusAttribute(self):
+        mic = Mic("SM57A")
+        mic._set_radius(5)
+        self.assertEqual(mic.radius, 5)
     
-    def test_MinimumRadiusIs0(self):
-        M1 = Mic("SM57A")
-        M1._Set_Radius(0)
-        self.assertEqual(M1.Radius, 0)
-        self.assertRaises(ValueError, M1._Set_Radius, -1)
+    def test_MinimumradiusIs0(self):
+        mic = Mic("SM57A")
+        mic._set_radius(0)
+        self.assertEqual(mic.radius, 0)
+        self.assertRaises(ValueError, mic._set_radius, -1)
         
-    def test_MaximumRadiusIs15(self):
-        M1 = Mic("SM57A")
-        M1._Set_Radius(15)
-        self.assertEqual(M1.Radius, 15)
-        self.assertRaises(ValueError, M1._Set_Radius, 16)    
+    def test_MaximumradiusIs15(self):
+        mic = Mic("SM57A")
+        mic._set_radius(15)
+        self.assertEqual(mic.radius, 15)
+        self.assertRaises(ValueError, mic._set_radius, 16)    
     
-    def test_SetXAngleUpdatesXAngleAttribute(self):
-        M1 = Mic("SM57A")
-        M1._Set_XAngle(-80)
-        self.assertEqual(M1.XAngle, -80)
+    def test_Setx_angleUpdatesx_angleAttribute(self):
+        mic = Mic("SM57A")
+        mic._set_x_angle(-80)
+        self.assertEqual(mic.x_angle, -80)
         
-    def test_MinimumXAngleIsMinus90(self):
-        M1 = Mic("SM57A")
-        M1._Set_XAngle(-90)
-        self.assertEqual(M1.XAngle, -90)
-        self.assertRaises(ValueError, M1._Set_XAngle, -91)
+    def test_Minimumx_angleIsMinus90(self):
+        mic = Mic("SM57A")
+        mic._set_x_angle(-90)
+        self.assertEqual(mic.x_angle, -90)
+        self.assertRaises(ValueError, mic._set_x_angle, -91)
     
-    def test_MaximumXAngleIs90(self):
-        M1 = Mic("SM57A")
-        M1._Set_XAngle(90)
-        self.assertEqual(M1.XAngle, 90)
-        self.assertRaises(ValueError, M1._Set_XAngle, 91)
+    def test_Maximumx_angleIs90(self):
+        mic = Mic("SM57A")
+        mic._set_x_angle(90)
+        self.assertEqual(mic.x_angle, 90)
+        self.assertRaises(ValueError, mic._set_x_angle, 91)
         
-    def test_SetYAngleUpdatesYAngleAttribute(self):
-        M1 = Mic("SM57A")
-        M1._Set_YAngle(89)
-        self.assertEqual(M1.YAngle, 89)
+    def test_Sety_angleUpdatesy_angleAttribute(self):
+        mic = Mic("SM57A")
+        mic._set_y_angle(89)
+        self.assertEqual(mic.y_angle, 89)
         
-    def test_MinimumYAngleIsMinus90(self):
-        M1 = Mic("SM57A")
-        M1._Set_YAngle(-90)
-        self.assertEqual(M1.YAngle, -90)
-        self.assertRaises(ValueError, M1._Set_YAngle, -91)
+    def test_Minimumy_angleIsMinus90(self):
+        mic = Mic("SM57A")
+        mic._set_y_angle(-90)
+        self.assertEqual(mic.y_angle, -90)
+        self.assertRaises(ValueError, mic._set_y_angle, -91)
     
-    def test_MaximumYAngleIs90(self):
-        M1 = Mic("SM57A")
-        M1._Set_YAngle(90)
-        self.assertEqual(M1.YAngle, 90)
-        self.assertRaises(ValueError, M1._Set_YAngle, 91)
+    def test_Maximumy_angleIs90(self):
+        mic = Mic("SM57A")
+        mic._set_y_angle(90)
+        self.assertEqual(mic.y_angle, 90)
+        self.assertRaises(ValueError, mic._set_y_angle, 91)
         
-    def test_SetDistanceUpdatesDistanceAttribute(self):
-        M1 = Mic("SM57A")
-        M1._Set_Distance(76)
-        self.assertEqual(M1.Distance, 76)
+    def test_SetdistanceUpdatesdistanceAttribute(self):
+        mic = Mic("SM57A")
+        mic._set_distance(76)
+        self.assertEqual(mic.distance, 76)
         
-    def test_MinimumDistanceIs0(self):
-        M1 = Mic("SM57A")
-        M1._Set_Distance(0)
-        self.assertEqual(M1.Distance, 0)
-        self.assertRaises(ValueError, M1._Set_Distance, -1)
+    def test_MinimumdistanceIs0(self):
+        mic = Mic("SM57A")
+        mic._set_distance(0)
+        self.assertEqual(mic.distance, 0)
+        self.assertRaises(ValueError, mic._set_distance, -1)
     
-    def test_MaximumDistanceIs120(self):
-        M1 = Mic("SM57A")
-        M1._Set_Distance(120)
-        self.assertEqual(M1.Distance, 120)
-        self.assertRaises(ValueError, M1._Set_Distance, 121)
+    def test_MaximumdistanceIs120(self):
+        mic = Mic("SM57A")
+        mic._set_distance(120)
+        self.assertEqual(mic.distance, 120)
+        self.assertRaises(ValueError, mic._set_distance, 121)
     
     def test_PlaceOnAmpDefaultValues(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp()
-        self.assertEqual(M1.Clock, 12)
-        self.assertEqual(M1.Radius, 0)
-        self.assertEqual(M1.XAngle, 0)
-        self.assertEqual(M1.YAngle, 0)
-        self.assertEqual(M1.Distance, 0)
-        self.assertEqual(M1.Placed, "Amp")
+        mic = Mic("SM57A")
+        mic.place_on_amp()
+        self.assertEqual(mic.clock, 12)
+        self.assertEqual(mic.radius, 0)
+        self.assertEqual(mic.x_angle, 0)
+        self.assertEqual(mic.y_angle, 0)
+        self.assertEqual(mic.distance, 0)
+        self.assertEqual(mic.placed, "Amp")
         
-    def test_PlaceOnAmpWithClock(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp(clock=6)
-        self.assertEqual(M1.Clock, 6)
+    def test_PlaceOnAmpWithclock(self):
+        mic = Mic("SM57A")
+        mic.place_on_amp(clock=6)
+        self.assertEqual(mic.clock, 6)
         
-    def test_PlaceOnAmpWithRadius(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp(radius=6)
-        self.assertEqual(M1.Radius, 6)
+    def test_PlaceOnAmpWithradius(self):
+        mic = Mic("SM57A")
+        mic.place_on_amp(radius=6)
+        self.assertEqual(mic.radius, 6)
         
-    def test_PlaceOnAmpWithXAngle(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp(x_angle=6)
-        self.assertEqual(M1.XAngle, 6)
+    def test_PlaceOnAmpWithx_angle(self):
+        mic = Mic("SM57A")
+        mic.place_on_amp(x_angle=6)
+        self.assertEqual(mic.x_angle, 6)
     
-    def test_PlaceOnAmpWithYAngle(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp(y_angle=6)
-        self.assertEqual(M1.YAngle, 6)
+    def test_PlaceOnAmpWithy_angle(self):
+        mic = Mic("SM57A")
+        mic.place_on_amp(y_angle=6)
+        self.assertEqual(mic.y_angle, 6)
         
-    def test_PlaceOnAmpWithDistance(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp(distance=6)
-        self.assertEqual(M1.Distance, 6)
+    def test_PlaceOnAmpWithdistance(self):
+        mic = Mic("SM57A")
+        mic.place_on_amp(distance=6)
+        self.assertEqual(mic.distance, 6)
         
     def test_PlaceInRoomDefaultValues(self):
-        M1 = Mic("SM57A")
-        M1.Place_In_Room()
-        self.assertIsNone(M1.Clock)
-        self.assertIsNone(M1.Radius)
-        self.assertIsNone(M1.XAngle)
-        self.assertIsNone(M1.YAngle)
-        self.assertEqual(M1.Distance, 60)
-        self.assertEqual(M1.Placed, "Room")
+        mic = Mic("SM57A")
+        mic.place_in_room()
+        self.assertIsNone(mic.clock)
+        self.assertIsNone(mic.radius)
+        self.assertIsNone(mic.x_angle)
+        self.assertIsNone(mic.y_angle)
+        self.assertEqual(mic.distance, 60)
+        self.assertEqual(mic.placed, "Room")
         
-    def test_PlaceInRoomWithDistance(self):
-        M1 = Mic("SM57A")
-        M1.Place_In_Room(36)
-        self.assertEqual(M1.Distance, 36)
+    def test_PlaceInRoomWithdistance(self):
+        mic = Mic("SM57A")
+        mic.place_in_room(36)
+        self.assertEqual(mic.distance, 36)
         
     def test_RemoveMicFromAmp(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp()
-        self.assertEqual(M1.Placed, "Amp")
-        M1.Remove_From_Use()
-        self.assertIsNone(M1.Clock)
-        self.assertIsNone(M1.Radius)
-        self.assertIsNone(M1.XAngle)
-        self.assertIsNone(M1.YAngle)
-        self.assertIsNone(M1.Distance)
-        self.assertIsNone(M1.Placed)
+        mic = Mic("SM57A")
+        mic.place_on_amp()
+        self.assertEqual(mic.placed, "Amp")
+        mic.remove_from_use()
+        self.assertIsNone(mic.clock)
+        self.assertIsNone(mic.radius)
+        self.assertIsNone(mic.x_angle)
+        self.assertIsNone(mic.y_angle)
+        self.assertIsNone(mic.distance)
+        self.assertIsNone(mic.placed)
         
     def test_RemoveMicFromRoom(self):
-        M1 = Mic("SM57A")
-        M1.Place_In_Room()
-        self.assertEqual(M1.Placed, "Room")
-        M1.Remove_From_Use()
-        self.assertIsNone(M1.Clock)
-        self.assertIsNone(M1.Radius)
-        self.assertIsNone(M1.XAngle)
-        self.assertIsNone(M1.YAngle)
-        self.assertIsNone(M1.Distance)
-        self.assertIsNone(M1.Placed)
+        mic = Mic("SM57A")
+        mic.place_in_room()
+        self.assertEqual(mic.placed, "Room")
+        mic.remove_from_use()
+        self.assertIsNone(mic.clock)
+        self.assertIsNone(mic.radius)
+        self.assertIsNone(mic.x_angle)
+        self.assertIsNone(mic.y_angle)
+        self.assertIsNone(mic.distance)
+        self.assertIsNone(mic.placed)
         
     def test_IsOnAmpNewToAmp(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_On_Amp())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Is_On_Amp())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_on_amp())
+        mic.place_on_amp()
+        self.assertTrue(mic.is_on_amp())
         
     def test_IsOnAmpRoomToAmp(self):
-        M1 = Mic("SM57A")
-        M1.Place_In_Room()
-        self.assertFalse(M1.Is_On_Amp())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Is_On_Amp())
+        mic = Mic("SM57A")
+        mic.place_in_room()
+        self.assertFalse(mic.is_on_amp())
+        mic.place_on_amp()
+        self.assertTrue(mic.is_on_amp())
         
     def test_IsOnAmpAmpToRoom(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_On_Amp())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Is_On_Amp())
-        M1.Place_In_Room()
-        self.assertFalse(M1.Is_On_Amp())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_on_amp())
+        mic.place_on_amp()
+        self.assertTrue(mic.is_on_amp())
+        mic.place_in_room()
+        self.assertFalse(mic.is_on_amp())
         
     def test_IsOnAmpRemoveFromAmp(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_On_Amp())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Is_On_Amp())
-        M1.Remove_From_Use()
-        self.assertFalse(M1.Is_On_Amp())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_on_amp())
+        mic.place_on_amp()
+        self.assertTrue(mic.is_on_amp())
+        mic.remove_from_use()
+        self.assertFalse(mic.is_on_amp())
     
     def test_IsOnAmpAmpToAmp(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_On_Amp())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Is_On_Amp())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Is_On_Amp())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_on_amp())
+        mic.place_on_amp()
+        self.assertTrue(mic.is_on_amp())
+        mic.place_on_amp()
+        self.assertTrue(mic.is_on_amp())
         
     def test_IsInRoomNewToRoom(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_In_Room())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Is_In_Room())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_in_room())
+        mic.place_in_room()
+        self.assertTrue(mic.is_in_room())
     
     def test_IsInRoomAmpToRoom(self):
-        M1 = Mic("SM57A")
-        M1.Place_On_Amp()
-        self.assertFalse(M1.Is_In_Room())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Is_In_Room())
+        mic = Mic("SM57A")
+        mic.place_on_amp()
+        self.assertFalse(mic.is_in_room())
+        mic.place_in_room()
+        self.assertTrue(mic.is_in_room())
         
     def test_IsInRoomRoomToAmp(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_In_Room())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Is_In_Room())
-        M1.Place_On_Amp()
-        self.assertFalse(M1.Is_In_Room())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_in_room())
+        mic.place_in_room()
+        self.assertTrue(mic.is_in_room())
+        mic.place_on_amp()
+        self.assertFalse(mic.is_in_room())
         
     def test_IsInRoomRemoveFromRoom(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_In_Room())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Is_In_Room())
-        M1.Remove_From_Use()
-        self.assertFalse(M1.Is_In_Room())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_in_room())
+        mic.place_in_room()
+        self.assertTrue(mic.is_in_room())
+        mic.remove_from_use()
+        self.assertFalse(mic.is_in_room())
     
     def test_IsInRoomRoomToRoom(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Is_In_Room())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Is_In_Room())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Is_In_Room())
+        mic = Mic("SM57A")
+        self.assertFalse(mic.is_in_room())
+        mic.place_in_room()
+        self.assertTrue(mic.is_in_room())
+        mic.place_in_room()
+        self.assertTrue(mic.is_in_room())
     
-    def test_HasBeenPlacedNew(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
+    def test_HasBeenplacedNew(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
     
-    def test_HasBeenPlacedNewToAmp(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Has_Been_Placed())
+    def test_HasBeenplacedNewToAmp(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_on_amp()
+        self.assertTrue(mic.has_been_placed())
     
-    def test_HasBeenPlacedNewToRoom(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Has_Been_Placed())
+    def test_HasBeenplacedNewToRoom(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_in_room()
+        self.assertTrue(mic.has_been_placed())
     
-    def test_HasBeenPlacedNewToRemoved(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Remove_From_Use()
-        self.assertFalse(M1.Has_Been_Placed())
+    def test_HasBeenplacedNewToRemoved(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.remove_from_use()
+        self.assertFalse(mic.has_been_placed())
     
-    def test_HasBeenPlacedAmpToAmp(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Has_Been_Placed())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Has_Been_Placed())
+    def test_HasBeenplacedAmpToAmp(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_on_amp()
+        self.assertTrue(mic.has_been_placed())
+        mic.place_on_amp()
+        self.assertTrue(mic.has_been_placed())
         
-    def test_HasBeenPlacedAmpToRoom(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Has_Been_Placed())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Has_Been_Placed())
+    def test_HasBeenplacedAmpToRoom(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_on_amp()
+        self.assertTrue(mic.has_been_placed())
+        mic.place_in_room()
+        self.assertTrue(mic.has_been_placed())
     
-    def test_HasBeenPlacedAmpToRemoved(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Has_Been_Placed())
-        M1.Remove_From_Use()
-        self.assertFalse(M1.Has_Been_Placed())
+    def test_HasBeenplacedAmpToRemoved(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_on_amp()
+        self.assertTrue(mic.has_been_placed())
+        mic.remove_from_use()
+        self.assertFalse(mic.has_been_placed())
     
-    def test_HasBeenPlacedRoomToAmp(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Has_Been_Placed())
-        M1.Place_On_Amp()
-        self.assertTrue(M1.Has_Been_Placed())
+    def test_HasBeenplacedRoomToAmp(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_in_room()
+        self.assertTrue(mic.has_been_placed())
+        mic.place_on_amp()
+        self.assertTrue(mic.has_been_placed())
     
-    def test_HasBeenPlacedRoomToRoom(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Has_Been_Placed())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Has_Been_Placed())
+    def test_HasBeenplacedRoomToRoom(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_in_room()
+        self.assertTrue(mic.has_been_placed())
+        mic.place_in_room()
+        self.assertTrue(mic.has_been_placed())
     
-    def test_HasBeenPlacedRoomToRemoved(self):
-        M1 = Mic("SM57A")
-        self.assertFalse(M1.Has_Been_Placed())
-        M1.Place_In_Room()
-        self.assertTrue(M1.Has_Been_Placed())
-        M1.Remove_From_Use()
-        self.assertFalse(M1.Has_Been_Placed())
+    def test_HasBeenplacedRoomToRemoved(self):
+        mic = Mic("SM57A")
+        self.assertFalse(mic.has_been_placed())
+        mic.place_in_room()
+        self.assertTrue(mic.has_been_placed())
+        mic.remove_from_use()
+        self.assertFalse(mic.has_been_placed())
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testValidateDefaultConstructor']
