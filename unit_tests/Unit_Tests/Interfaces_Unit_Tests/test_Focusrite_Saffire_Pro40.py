@@ -3,95 +3,123 @@ Created on Mar 18, 2015
 
 @author: desposito
 '''
+
 import unittest
-from model.Interfaces.Focusrite_Saffire_Pro40 import Focusrite_Saffire_Pro40
+
+from model.interfaces.focusrite_saffire_pro40 import Focusrite_Saffire_Pro40,\
+    InputChannel, OutputChannel
+from model.utilities.controls import Switch
+
 
 class Test(unittest.TestCase):
 
+
     def test_ValidateDefaultConstructor(self):
-        F1 = Focusrite_Saffire_Pro40()
-        self.assertEqual(len(F1.AnalogInputs), 8)
-        self.assertEqual(len(F1.AnalogOutputs), 8)
-        self.assertEqual(F1.AnalogInputs[0].Level.Current_Position(), 0)
-        self.assertEqual(F1.AnalogOutputs[0].Level.Current_Position(), 0)
-        self.assertFalse(F1.PhantomPower[0].Current_State())
-        self.assertFalse(F1.PhantomPower[1].Current_State())
-        self.assertEqual(F1.MainLevel.Current_Position(), 0)
-        self.assertEqual(F1.PhonesLevels[0].Current_Position(), 0)
-        self.assertEqual(F1.PhonesLevels[1].Current_Position(), 0)
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        self.assertEqual(len(aud_int.a_ins), 8)
+        self.assertEqual(len(aud_int.a_outs), 8)
+        self.assertIsInstance(aud_int.a_ins[0], InputChannel)
+        self.assertIsInstance(aud_int.a_outs[0], OutputChannel)
+        self.assertFalse(aud_int.phantom[0].state)
+        self.assertFalse(aud_int.phantom[1].state)
+        self.assertEqual(aud_int.main_level.current_position, 0)
+        self.assertEqual(aud_int.phones_levels[0].current_position, 0)
+        self.assertEqual(aud_int.phones_levels[1].current_position, 0)
         
     def test_ConstructorWithMainLevel(self):
-        F1 = Focusrite_Saffire_Pro40(main_level=3)
-        self.assertEqual(F1.MainLevel.Current_Position(), 3)
         
-    def test_ConstructorWithMic1(self):
-        F1 = Focusrite_Saffire_Pro40(phones_level_1=4)
-        self.assertEqual(F1.PhonesLevels[0].Current_Position(), 4)
+        aud_int = Focusrite_Saffire_Pro40(main_level=3)
+        self.assertEqual(aud_int.main_level.current_position, 3)
         
-    def test_ConstructorWithMic2(self):
-        F1 = Focusrite_Saffire_Pro40(phones_level_2=5)
-        self.assertEqual(F1.PhonesLevels[1].Current_Position(), 5)
+    def test_ConstructorWithPhones1(self):
+        
+        aud_int = Focusrite_Saffire_Pro40(phones_level_1=4)
+        self.assertEqual(aud_int.phones_levels[0].current_position, 4)
+        
+    def test_ConstructorWithPhones2(self):
+        
+        aud_int = Focusrite_Saffire_Pro40(phones_level_2=5)
+        self.assertEqual(aud_int.phones_levels[1].current_position, 5)
 
     def test_ConstructedInterfaceHasSwitchesOnChannels1And2(self):
-        F1 = Focusrite_Saffire_Pro40()
-        self.assertFalse(F1.AnalogInputs[0].Is_Instrument_Switch_On())
-        self.assertFalse(F1.AnalogInputs[1].Is_Instrument_Switch_On())
-        self.assertRaises(AttributeError, F1.AnalogInputs[2].Is_Instrument_Switch_On)
-        self.assertRaises(AttributeError, F1.AnalogInputs[3].Is_Instrument_Switch_On)
-        self.assertRaises(AttributeError, F1.AnalogInputs[4].Is_Instrument_Switch_On)
-        self.assertRaises(AttributeError, F1.AnalogInputs[5].Is_Instrument_Switch_On)
-        self.assertRaises(AttributeError, F1.AnalogInputs[6].Is_Instrument_Switch_On)
-        self.assertRaises(AttributeError, F1.AnalogInputs[7].Is_Instrument_Switch_On)
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        self.assertIsInstance(aud_int.a_ins[0].inst_sw, Switch)
+        self.assertIsInstance(aud_int.a_ins[0].pad_sw, Switch)
+        self.assertIsInstance(aud_int.a_ins[1].inst_sw, Switch)
+        self.assertIsInstance(aud_int.a_ins[1].pad_sw, Switch)
+        self.assertIsNone(aud_int.a_ins[2].inst_sw)
+        self.assertIsNone(aud_int.a_ins[2].pad_sw)
+        self.assertIsNone(aud_int.a_ins[3].inst_sw)
+        self.assertIsNone(aud_int.a_ins[3].pad_sw)
+        self.assertIsNone(aud_int.a_ins[4].inst_sw)
+        self.assertIsNone(aud_int.a_ins[4].pad_sw)
+        self.assertIsNone(aud_int.a_ins[5].inst_sw)
+        self.assertIsNone(aud_int.a_ins[5].pad_sw)
+        self.assertIsNone(aud_int.a_ins[6].inst_sw)
+        self.assertIsNone(aud_int.a_ins[6].pad_sw)
+        self.assertIsNone(aud_int.a_ins[7].inst_sw)
+        self.assertIsNone(aud_int.a_ins[7].pad_sw)
 
     def test_Bank1PhantomSwitchReturnedIfChannelIs1Thru4(self):
-        F1 = Focusrite_Saffire_Pro40()
+        
+        aud_int = Focusrite_Saffire_Pro40()
         for channel in range(4):
-            switch = F1._Get_Switch_Based_On_Channel(channel + 1)
-            self.assertEqual(switch.Name, "Bank 1 Phantom Power")
+            switch = aud_int._get_switch_based_on_channel(channel+1)
+            self.assertEqual(switch.name, "Bank 1 Phantom Power")
             
     def test_Bank1PhantomSwitchReturnedIfChannelIs5Thru8(self):
-        F1 = Focusrite_Saffire_Pro40()
+        
+        aud_int = Focusrite_Saffire_Pro40()
         for channel in range(4):
-            switch = F1._Get_Switch_Based_On_Channel(channel + 5)
-            self.assertEqual(switch.Name, "Bank 2 Phantom Power")
+            switch = aud_int._get_switch_based_on_channel(channel+5)
+            self.assertEqual(switch.name, "Bank 2 Phantom Power")
             
     def test_GetSwitchMethodRaisesExceptionOnInvalidInput(self):
-        F1 = Focusrite_Saffire_Pro40()
-        self.assertRaises(ValueError, F1._Get_Switch_Based_On_Channel, 0)
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        self.assertRaises(ValueError, aud_int._get_switch_based_on_channel, 0)
         
     def test_Channels1thru4ReportFalseWhenPhantomPowerOff(self):
-        F1 = Focusrite_Saffire_Pro40()
-        F1.PhantomPower[1].Turn_On()
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        aud_int.phantom[0].turn_off()
         for channel in range(4):
-            self.assertFalse(F1.IsChannelUsingPhantomPower(channel + 1))
+            self.assertFalse(aud_int.is_channel_using_phantom_power(channel+1))
 
     def test_Channels1thru4ReportTrueWhenPhantomPowerOn(self):
-        F1 = Focusrite_Saffire_Pro40()
-        F1.PhantomPower[0].Turn_On()
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        aud_int.phantom[0].turn_on()
         for channel in range(4):
-            self.assertTrue(F1.IsChannelUsingPhantomPower(channel + 1))
+            self.assertTrue(aud_int.is_channel_using_phantom_power(channel+1))
 
     def test_Channels5thru8ReportFalseWhenPhantomPowerOff(self):
-        F1 = Focusrite_Saffire_Pro40()
-        F1.PhantomPower[0].Turn_On()
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        aud_int.phantom[1].turn_off()
         for channel in range(4):
-            self.assertFalse(F1.IsChannelUsingPhantomPower(channel + 5))
+            self.assertFalse(aud_int.is_channel_using_phantom_power(channel+5))
 
     def test_Channels5thru8ReportTrueWhenPhantomPowerOn(self):
-        F1 = Focusrite_Saffire_Pro40()
-        F1.PhantomPower[1].Turn_On()
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        aud_int.phantom[1].turn_on()
         for channel in range(4):
-            self.assertTrue(F1.IsChannelUsingPhantomPower(channel + 5))
+            self.assertTrue(aud_int.is_channel_using_phantom_power(channel+5))
             
     def test_SetOutputLevel(self):
-        F1 = Focusrite_Saffire_Pro40()
-        F1.AnalogOutputs[0].Level.Turn_To(5)
-        self.assertEqual(F1.AnalogOutputs[0].Level.Current_Position(), 5)
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        aud_int.a_outs[0].level.turn_to(5)
+        self.assertEqual(aud_int.a_outs[0].level.current_position, 5)
         
     def test_SetInputLevel(self):
-        F1 = Focusrite_Saffire_Pro40()
-        F1.AnalogInputs[0].Level.Turn_To(5)
-        self.assertEqual(F1.AnalogInputs[0].Level.Current_Position(), 5)
+        
+        aud_int = Focusrite_Saffire_Pro40()
+        aud_int.a_ins[0].level.turn_to(5)
+        self.assertEqual(aud_int.a_ins[0].level.current_position, 5)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.test_ValidateDefaultConstructor']
