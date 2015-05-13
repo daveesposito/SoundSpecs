@@ -17,35 +17,12 @@ class DriveChannel():
         '''Constructor
         '''
         
-        try:
-            gain_val = float(gain)
-        except:
-            raise TypeError("Invalid gain value: {0}".format(str(gain)))
-        
-        try:
-            bass_val = float(bass)
-        except:
-            raise TypeError("Invalid bass value: {0}".format(str(bass)))
-        
-        try:
-            mid_val = float(mid)
-        except:
-            raise TypeError("Invalid mid value: {0}".format(str(mid)))
-        
-        try:
-            treble_val = float(treble)
-        except:
-            raise TypeError("Invalid treble value: {0}".format(str(treble)))
-                    
-        try:
-            contour_val = float(contour)
-        except:
-            raise TypeError("Invalid contour value: {0}".format(str(contour)))
-        
-        try:
-            volume_val = float(volume)
-        except:
-            raise TypeError("Invalid volume value: {0}".format(str(volume)))
+        gain_val = self._is_value_float(gain)
+        bass_val = self._is_value_float(bass)
+        mid_val = self._is_value_float(mid)
+        treble_val = self._is_value_float(treble)
+        contour_val = self._is_value_float(contour)
+        volume_val = self._is_value_float(volume)
         
         self.drive_type = Switch("Drive Type", "OD2", "OD1", False)
         self.gain = Knob("Gain", current_position=gain_val)
@@ -73,3 +50,12 @@ class DriveChannel():
         
         return self.drive_type.state_name()
     
+    def _is_value_float(self, value):
+        '''Ensure that the provided value can be reprented as a float.
+        '''
+        
+        try:
+            return float(value)
+        except:
+            raise TypeError("Invalid input: {0}".format(value))
+        

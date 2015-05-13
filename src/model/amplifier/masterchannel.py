@@ -16,21 +16,9 @@ class MasterChannel():
         '''Constructor
         '''
 
-        try:
-            volume_val = float(volume)
-        except:
-            raise TypeError("Invalid volume value: {0}".format(str(volume)))
-        
-        try:
-            reverb_val = float(reverb)
-        except:
-            raise TypeError("Invalid reverb value: {0}".format(str(reverb)))
-        
-        try:
-            send_level_val = float(send_level)
-        except:
-            raise TypeError("Invalid send_level value: {0}"\
-                            .format(str(send_level)))
+        volume_val = self._is_value_float(volume)
+        reverb_val = self._is_value_float(reverb)
+        send_level_val = self._is_value_float(send_level)
                     
         self.channel_select = Switch("Channel Select", "Clean", "Drive")
         self.volume = Knob("Master Volume", current_position=volume_val)
@@ -55,3 +43,12 @@ class MasterChannel():
         
         return self.channel_select.state_name()
     
+    def _is_value_float(self, value):
+        '''Ensure that the provided value can be reprented as a float.
+        '''
+        
+        try:
+            return float(value)
+        except:
+            raise TypeError("Invalid input: {0}".format(value))
+        

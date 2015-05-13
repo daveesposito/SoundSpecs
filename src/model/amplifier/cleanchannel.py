@@ -16,26 +16,11 @@ class CleanChannel():
         '''Constructor
         '''
     
-        try:
-            gain_val = float(gain)
-        except:
-            raise TypeError("Invalid gain value: {0}".format(str(gain)))
-        
-        try:
-            bass_val = float(bass)
-        except:
-            raise TypeError("Invalid bass value: {0}".format(str(bass)))
-        
-        try:
-            mid_val = float(mid)
-        except:
-            raise TypeError("Invalid mid value: {0}".format(str(mid)))
-        
-        try:
-            treble_val = float(treble)
-        except:
-            raise TypeError("Invalid treble value: {0}".format(str(treble)))
-                    
+        gain_val = self._is_value_float(gain)
+        bass_val = self._is_value_float(bass)
+        mid_val = self._is_value_float(mid)
+        treble_val = self._is_value_float(treble)
+                            
         self.clean_type = Switch("Clean Type", "Crunch", "Clean", False)
         self.gain = Knob("Gain", current_position=gain_val)
         self.bass = Knob("Bass", current_position=bass_val)
@@ -59,3 +44,13 @@ class CleanChannel():
         '''
         
         return self.clean_type.state_name()
+    
+    def _is_value_float(self, value):
+        '''Ensure that the provided value can be reprented as a float.
+        '''
+        
+        try:
+            return float(value)
+        except:
+            raise TypeError("Invalid input: {0}".format(value))
+        

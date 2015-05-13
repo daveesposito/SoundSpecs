@@ -12,7 +12,7 @@ from model.amplifier.cleanchannel import CleanChannel
 class Test(unittest.TestCase):
 
 
-    def testDefaultConstructorValidation(self):
+    def test_DefaultConstructorValidation(self):
         
         clean = CleanChannel()
         self.assertEqual(clean.gain.current_position, 0.0)
@@ -20,27 +20,43 @@ class Test(unittest.TestCase):
         self.assertEqual(clean.mid.current_position, 0.0)
         self.assertEqual(clean.treble.current_position, 0.0)
 
-    def testConstructorWithGainSetting(self):
+    def test_ConstructorWithGainSetting(self):
         
         clean = CleanChannel(gain=4)
         self.assertEqual(clean.gain.current_position, 4)
 
-    def testConstructorWithBassSetting(self):
+    def test_ConstructorWithBassSetting(self):
         
         clean = CleanChannel(bass=5.1)
         self.assertEqual(clean.bass.current_position, 5.1)
         
-    def testConstructorWithMidSetting(self):
+    def test_ConstructorWithMidSetting(self):
         
         clean = CleanChannel(mid=4.7)
         self.assertEqual(clean.mid.current_position, 4.7)
     
-    def testConstructorWithTrebleSetting(self):
+    def test_ConstructorWithTrebleSetting(self):
         
         clean = CleanChannel(treble=9.9)
         self.assertEqual(clean.treble.current_position, 9.9)
+
+    def test_NonNumbericGainRaisesException(self):
         
-    def testConstructorWithAllSettings(self):
+        self.assertRaises(TypeError, CleanChannel, gain="gain")
+    
+    def test_NonNumbericBassRaisesException(self):
+        
+        self.assertRaises(TypeError, CleanChannel, bass="bass")
+        
+    def test_NonNumbericMidRaisesException(self):
+        
+        self.assertRaises(TypeError, CleanChannel, mid="mid")
+        
+    def test_NonNumbericTrebleRaisesException(self):
+        
+        self.assertRaises(TypeError, CleanChannel, treble="treble")
+        
+    def test_ConstructorWithAllSettings(self):
         
         clean = CleanChannel(3, 7, 8, 9)
         self.assertEqual(clean.gain.current_position, 3.0)
@@ -48,18 +64,18 @@ class Test(unittest.TestCase):
         self.assertEqual(clean.mid.current_position, 8.0)
         self.assertEqual(clean.treble.current_position, 9.0)
     
-    def testReadDefaultCleanType(self):
+    def test_ReadDefaultCleanType(self):
         
         clean = CleanChannel()
         self.assertEqual(clean.current_type(), "Clean") 
     
-    def testSelectCrunch(self):
+    def test_SelectCrunch(self):
         
         clean = CleanChannel()
         clean.select_crunch()
         self.assertEqual(clean.current_type(), "Crunch")  
     
-    def testSelectClean(self):
+    def test_SelectClean(self):
         
         clean = CleanChannel()
         clean.select_crunch()
